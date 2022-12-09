@@ -1,7 +1,8 @@
 ﻿
-li {
+
+/* li {
     color: blue;
-}
+} */
 
 body {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
@@ -40,8 +41,7 @@ a.homePage {
 #small_logo {
     margin-left: 35px;
     margin-top: 25px;
-    width : 20%;
-    height : 20%;
+
 }
 
 h1 {
@@ -92,4 +92,110 @@ h1 {
     padding: 3px 8px;
     display: inline-block;
     margin-top: 6px;
+}
+/* login/newAccount */
+
+.container {
+    background-color: black;
+    border-top: none;
+    height: 30px;
+    min-height: 30px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: -1px;
+}
+
+#newAccount {
+    color: #DD7835;
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    font-weight: 600;
+    position: absolute;
+    right: 11.5em;
+    top: 0.3em;
+}
+
+#login {
+    color: #DD7835;
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    font-weight: 600;
+    position: absolute;
+    right: 3em;
+    top: 0.3em;
+}
+
+/* new_account */
+
+.container_parent {
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+.container_child {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    width: 650px;
+    position: relative;
+    top: 5%;
+    margin: 30px;
+    padding: 80px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    line-height: 2.5em;
+    opacity: 0.9;
+    border-radius: 2%;
+    display: inline-block
+}
+
+.input_form {
+    text-align: left;
+}
+
+#submit {
+    background-color: #DD7835;
+    border: none;
+    text-decoration: none;
+    color: white;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    cursor: pointer;
+}
+
+/* footer */
+
+.footer {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.800);
+    margin: 0;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.footer__nav {
+    list-style-type: none;
+}
+
+.nav__title {
+    text-decoration: none;
+    color: white;
+    line-height: 22pt;
+}
+
+#copyright {
+    font-style: italic;
+    text-align: right;
+    padding: 0.5em;
+    background-color: black;
+    color: #ffffff;
+    margin: 0;
+    font-size: small;
 }

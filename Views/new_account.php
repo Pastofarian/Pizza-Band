@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/style.css">
-    <title>Menu des pizzas</title>
+    <title>Nouveau compte</title>
 </head>
 <body>
 <header>    
@@ -16,31 +16,41 @@
 </header> 
     <a href="menu_pizzas.php"><img src="../Images/small_logo.png" id="small_logo"></a>
     <div class="menu_title">
-        <h1>Les Pizzas</h1>
+        <h1>Inscrivez-vous !</h1>
     </div>
-
-    <div class="menu_list">
-    <?php
-        session_start();
-        $pizzas = ["Marguerita"=>17, "Quatro Stagioni"=>20, "Reine"=>22, "Calzone"=>18, "Capriocciosa"=>18, "Saumon"=>23, "Caprese"=>13, "Pepperoni"=>15]; // problème de session avec le contrôleur?
-
-        $_SESSION["pizzas"] = $pizzas;
-
-        foreach ($_SESSION["pizzas"] as $key => $value)
-        {
-        echo '<div class="menu_list_item">';
-            echo '<span class="menu_list_title">'?><?=$key?><?='</span>';
-            echo '<span class="menu_list_price">'?><?=$value?><?='€</span>';
-            echo '<span class="menu_list_ingredients">ingredients</span>';
-            echo '<span class="menu_list_badge">VÉGÉTARIENNE</span>';
-        echo '</div>';
-            
-        //var_dump($_SESSION["pizzas"]);
-        }
-        //echo "test";
-        //session_destroy();
-        ?>
-    </div>
+    <main role="main">
+        <div class="container_parent">
+            <div class="container_child">
+    <form action="../Controlers/control_new_account.php" method="POST">
+                    <p class="input_form"><label for="prenom">Prénom *</label>
+                        <input type="text" name="prenom" id="prenom" autocomplete="on" required="required">&nbsp;&nbsp;&nbsp;
+                        
+                        <label for="nom">Nom *</label>
+                        <input type="text" name="nom" id="nom" autocomplete="on" required="required">
+                    </p>
+                    <p class="input_form">
+                        <label for="naissance">Date de naissance *</label>
+                        <input type="date" id="naissance" name="dob" required="required">
+                    </p>
+                    <p class="input_form">
+                        <label for="email">Adresse e-mail *</label>
+                        <input type="email" id="email" name="email" autocomplete="on" required="required">
+                    </p>
+                    <p class="input_form">
+                    <label for="pass">Entrez un mot de passe **</label>
+                    <input type="password" id="pass1" name="pass1" required="required"><br>
+                    <label for="pass">Confirmer votre mot de passe **</label>
+                    <input type="password" id="pass2" name="pass2" required="required"><br>
+                    </p>
+                        <input type="submit" value="Envoyer" id="submit">
+                    </p>
+                    <p style="font-size:12px">(*) Champs requis</p>
+                    <p style="font-size:12px"> (**) Le mot de passe doit comporter : 8 caractères minimum, 1 chiffre minimum, 1 majuscule minimum, 1 minuscule minimum</p>
+                    <p>
+                </form>
+                </div>
+        </div>
+    </main>
     <footer class="footer">
         <ul class="footer__nav">
             <li>
