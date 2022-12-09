@@ -14,16 +14,22 @@
     </div>
 
     <div class="menu_list">
+    <?php
+        session_start();
+        foreach ($_SESSION["pizzas"] as $key => $value)
+        {
+        echo '<div class="menu_list_item">';
+            echo '<span class="menu_list_title">'?><?=$key?><?='</span>';
+            echo '<span class="menu_list_price">'?><?=$value?><?='</span>';
+            echo '<span class="menu_list_ingredients">ingredients</span>';
 
-        <div class="menu_list_item">
-            <span class="menu_list_title">pizza nom</span>
-            <span class="menu_list_price">prix€</span>
-            <span class="menu_list_ingredients">ingredients</span>
+            echo '<span class="menu_list_badge">VÉGÉTARIENNE</span>';
+        echo '</div>';
 
-            <span class="menu_list_badge">VÉGÉTARIENNE</span>
-            
-        </div>
-
+        //var_dump($_SESSION["pizzas"]);
+        }
+        //session_destroy();
+        ?>
     </div>
 </body>
 </html>

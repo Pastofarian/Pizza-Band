@@ -40,6 +40,8 @@ a.homePage {
 #small_logo {
     margin-left: 35px;
     margin-top: 25px;
+    width : 20%;
+    height : 20%;
 }
 
 h1 {
@@ -47,6 +49,7 @@ h1 {
     background-color: #DD7835;
     display: inline;
     padding: 8px 22px;
+    font-size: 45px;
 }
 
 .menu_title {
@@ -59,7 +62,7 @@ h1 {
 }
 
 .menu_list_item {
-    font-size: 20px;
+    font-size: 30px;
     margin: 30px 0px;
 }
 
@@ -74,7 +77,7 @@ h1 {
 
 .menu_list_ingredients {
     color: #D8D8D8;
-    font-size: 14px;
+    font-size: 20px;
     margin-top: 4px;
     display: block;
     width: 320px;
@@ -83,7 +86,7 @@ h1 {
 .menu_list_badge {
     color: black;
     background-color: #DD7835;
-    font-size: 9px;
+    font-size: 14px;
     font-weight: bold;
     border-radius: 8px;
     padding: 3px 8px;
