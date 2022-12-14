@@ -11,16 +11,23 @@ $data1 = $_POST["pass1"];
 unset($_POST["pass1"]); //efface les traces
 $data2 = $_POST["pass2"];
 unset($_POST["pass2"]);
-echo $test = "test";
-$_SESSION["checkEmpty"] = checkEmpty($_POST);
-$_SESSION["matchPassword"] = MatchPassword($data1, $data2);
-$_SESSION["checkIdFn"] = validateUserId($_POST["prenom"], "prenom");
-$_SESSION["checkIdLn"] = validateUserId($_POST["nom"], "nom");
-$_SESSION["checkEmail"] = checkEmail($_POST["email"]);
-$_SESSION["checkDob"] = checkDob($_POST["dob"]);
-$_SESSION["checkPassword"] = checkPassword($data1);
-$_SESSION["checkDuplicates"] = duplicates($_POST["email"]);
 
+$_SESSION["checkEmpty"] = checkEmpty($_POST);
+echo "test1";
+$_SESSION["matchPassword"] = MatchPassword($data1, $data2);
+echo "test2";
+$_SESSION["checkIdFn"] = validateUserId($_POST["prenom"], "prenom");
+echo "test3";
+$_SESSION["checkIdLn"] = validateUserId($_POST["nom"], "nom");
+echo "test4";
+$_SESSION["checkEmail"] = checkEmail($_POST["email"]);
+echo "test5";
+$_SESSION["checkDob"] = checkDob($_POST["dob"]);
+echo "test6";
+$_SESSION["checkPassword"] = checkPassword($data1);
+echo "test7";
+// $_SESSION["checkDuplicates"] = duplicates($_POST["email"]);
+// echo "test8";
 $data1 = password_hash($data1,PASSWORD_BCRYPT); //écrase data1 avec password crypté
 
 if(
@@ -31,7 +38,7 @@ if(
     !empty($_SESSION["checkEmail"]) ||
     !empty($_SESSION["checkPassword"]) ||
     !empty($_SESSION["checkDob"]) ||
-    !empty($_SESSION["checkDuplicates"])
+    //!empty($_SESSION["checkDuplicates"])
 
     ) {
     header("Location: " . $registration); 
