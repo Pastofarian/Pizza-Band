@@ -7,5 +7,5 @@ $pizzas = ["Marguerita"=>17, "Quatro Stagioni"=>20, "Reine"=>22, "Calzone"=>18, 
 
 $_SESSION["pizzas"] = $pizzas;
 
-//header("Location: ../Views/menu_pizzas.php");
+header("Location: ../Views/menu_pizzas.php");
 ?>

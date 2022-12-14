@@ -11,7 +11,7 @@ $data1 = $_POST["pass1"];
 unset($_POST["pass1"]); //efface les traces
 $data2 = $_POST["pass2"];
 unset($_POST["pass2"]);
-
+echo $test = "test";
 $_SESSION["checkEmpty"] = checkEmpty($_POST);
 $_SESSION["matchPassword"] = MatchPassword($data1, $data2);
 $_SESSION["checkIdFn"] = validateUserId($_POST["prenom"], "prenom");
