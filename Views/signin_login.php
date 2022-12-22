@@ -18,7 +18,7 @@
               Connexion
               <span class="underline"></span>
             </button>
-            <form class="form form-login" action="../Controlers/control_new_account.php" method="POST">
+            <form class="form form-login">
               <fieldset>
                 <legend>Entrez votre Email et mot de passe pour vous connecter</legend>
                 <div class="input-block">
@@ -38,40 +38,67 @@
               Inscription
               <span class="underline"></span>
             </button>
-            <form class="form form-signup">
+
+            <form class="form form-signup" action="../Controlers/control_new_account.php" method="POST">
+            <div class="error-message">
+                <?php
+                session_start();
+                //error_reporting(0);
+
+                foreach($_SESSION["checkEmpty"] as $key => $value){
+                    echo'<pre>';
+                    echo $key.' -> '.$value.'<br>';
+                }
+                echo'<pre>';
+                echo $_SESSION["checkPassword"];
+                echo'<pre>';
+                echo $_SESSION["checkIdFn"];
+                echo'<pre>';
+                echo $_SESSION["checkIdLn"];
+                echo'<pre>';
+                echo $_SESSION["checkEmail"];
+                echo'<pre>';
+                echo $_SESSION["checkDob"];
+                echo'<pre>';
+                echo $_SESSION["matchPassword"];
+                echo'<pre>';
+                echo $_SESSION["checkDuplicates"];
+                //session_destroy();
+                ?>
+              </div>
               <fieldset>
                 <legend>Entrez votre E-mail, mot de passe et confirmation de mot de passe pour l'inscription</legend>
                 <div class="input-block">
                   <label for="lastname">Nom *</label>
-                  <input id="lastname" type="text" autocomplete="on" required value="Hetfield">
+                  <input name="lastname" id="lastname" type="text" autocomplete="on" required value="Hetfield">
                 </div>
                   <div class="input-block">
                   <label for="firstname">Prenom *</label>
-                  <input id="firstname" type="text" autocomplete="on" required value="James">
+                  <input name="firstname" id="firstname" type="text" autocomplete="on" required value="James">
                 </div>
                 <div class="input-block">
                   <label for="email">E-mail *</label>
-                  <input id="email" type="email" autocomplete="on" required value="james.hetfield@outlook.com">
+                  <input name="email" id="email" type="email" autocomplete="on" required value="james.hetfield@outlook.com">
                 </div>
                 <div class="input-block">
                   <label for="dob">Date de naissance *</label>
-                  <input id="dob" type="date" autocomplete="on" required value="1963-08-03">
+                  <input name="dob" id="dob" type="date" autocomplete="on" required value="1963-08-03">
                 </div>
                 <div class="input-block">
                   <label for="address">Adresse *</label>
-                  <input id="address" type="text" autocomplete="on" required value="Rue de la Limite, 1">
+                  <input name="address" id="address" type="text" autocomplete="on" required value="Rue de la Limite, 1">
                 </div>
                 <div class="input-block">
                   <label for="postcode">Code Postal *</label>
-                  <input id="postcode" type="text" autocomplete="on" required value="1300">
+                  <input name="postcode" id="postcode" type="text" autocomplete="on" required value="1300">
                 </div>
                 <div class="input-block">
                   <label for="signup-password">Mot de passe **</label>
-                  <input id="signup-password" type="password" required>
+                  <input name="signup-password" id="signup-password" type="password" required>
                 </div>
                 <div class="input-block">
                   <label for="signup-password-confirm">Mot de passe confirmation **</label>
-                  <input id="signup-password-confirm" type="password" required>
+                  <input name="signup-password-confirm" id="signup-password-confirm" type="password" required>
                 </div>
                 <p style="font-size:12px">(*) Champs requis</p>
                     <p style="font-size:12px"> (**) Le mot de passe doit comporter : <br>8 caractères minimum, 1 chiffre minimum, 1 majuscule minimum, 1 minuscule minimum</p>
@@ -94,3 +121,4 @@
         })
     })
         </script> 
+

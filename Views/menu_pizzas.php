@@ -41,6 +41,13 @@
         //session_destroy();
         ?>
     </div>
+    <div class="container_basket">
+        <div class="basket">
+            <form class="form form-signup" action="../Controlers/control_new_account.php" method="POST">
+            <button type="submit" class="btn-basket">Acheter</button>
+
+        </div>
+    </div>
     <footer class="footer">
         <ul class="footer__nav">
             <li>

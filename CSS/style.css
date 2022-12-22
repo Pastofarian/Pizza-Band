@@ -199,3 +199,32 @@ h1 {
     margin: 0;
     font-size: small;
 }
+
+
+/* basket */
+
+.container_basket {
+    background-image: url(../images/Funny_cow_by_Lin0ra.jpg);
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+.basket {
+    font-family: 'Poppins', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    width: 650px;
+    position: relative;
+    top: 5%;
+    margin: 30px;
+    padding: 80px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    line-height: 2em;
+    opacity: 0.9;
+    border-radius: 2%;
+    display: inline-block
+}
