@@ -1,7 +1,5 @@
 <?php
-// echo "<pre>";
-// var_dump($_POST);
-// echo "</pre>";
+
 session_start();
 include("../Functions/functions.php");
 include("../Models/insert.php"); 

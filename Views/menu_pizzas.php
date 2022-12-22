@@ -10,8 +10,8 @@
 <body>
 <header>    
         <div class="container">
-            <a href="new_account.php"><span id="newAccount">Créer un compte</span></a>
-            <a href=""><span id="login">| Se connecter</span></a>
+            <a href="signin_login.php"><span id="newAccount">Créer un compte</span></a>
+            <a href="signin_login.php"><span id="login">| Se connecter</span></a>
         </div>
 </header> 
     <a href="menu_pizzas.php"><img src="../Images/small_logo.png" id="small_logo"></a>
@@ -41,13 +41,12 @@
         //session_destroy();
         ?>
     </div>
-    <div class="container_basket">
+    <!-- <div class="container_basket">
         <div class="basket">
             <form class="form form-signup" action="../Controlers/control_new_account.php" method="POST">
             <button type="submit" class="btn-basket">Acheter</button>
-
         </div>
-    </div>
+    </div> -->
     <footer class="footer">
         <ul class="footer__nav">
             <li>

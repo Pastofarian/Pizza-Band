@@ -9,25 +9,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 
 </head>
-<body>
+<body>           
     <a href="menu_pizzas.php"><img src="../Images/main_logo.png" id="main_logo"></a>
-	<section class="forms-section">
+	    <section class="forms-section">
         <div class="forms">
           <div class="form-wrapper is-active">
             <button type="button" class="switcher switcher-login">
               Connexion
               <span class="underline"></span>
             </button>
-            <form class="form form-login">
+            <form class="form form-login" action="../Controlers/control_signin.php" method="POST">
+            <div class="error-message">
+                <?php
+                  session_start();
+                  error_reporting(0);
+                  //if(!isset($_SESSION["error"])){
+                  echo'<pre>';
+                  echo $_SESSION["error"];
+                  echo'<pre>';
+                  //session_destroy();
+                  //}
+                  ?>
+                </div>
               <fieldset>
                 <legend>Entrez votre Email et mot de passe pour vous connecter</legend>
                 <div class="input-block">
                   <label for="login-email">E-mail</label>
-                  <input id="login-email" autocomplete="on" type="email" required>
+                  <input id="login-email" autocomplete="on" type="email" required name="logEmail">
                 </div>
                 <div class="input-block">
                   <label for="login-password">Mot de passe</label>
-                  <input id="login-password" autocomplete="on" type="password" required>
+                  <input id="login-password" autocomplete="on" type="password" required name="logPassword">
                 </div>
               </fieldset>
               <button type="submit" class="btn-login">Connexion</button>
@@ -70,27 +82,27 @@
                 <legend>Entrez votre E-mail, mot de passe et confirmation de mot de passe pour l'inscription</legend>
                 <div class="input-block">
                   <label for="lastname">Nom *</label>
-                  <input name="lastname" id="lastname" type="text" autocomplete="on" required value="Hetfield">
+                  <input name="lastname" id="lastname" type="text" autocomplete="on" required>
                 </div>
                   <div class="input-block">
                   <label for="firstname">Prenom *</label>
-                  <input name="firstname" id="firstname" type="text" autocomplete="on" required value="James">
+                  <input name="firstname" id="firstname" type="text" autocomplete="on" required>
                 </div>
                 <div class="input-block">
                   <label for="email">E-mail *</label>
-                  <input name="email" id="email" type="email" autocomplete="on" required value="james.hetfield@outlook.com">
+                  <input name="email" id="email" type="email" autocomplete="on" required>
                 </div>
                 <div class="input-block">
                   <label for="dob">Date de naissance *</label>
-                  <input name="dob" id="dob" type="date" autocomplete="on" required value="1963-08-03">
+                  <input name="dob" id="dob" type="date" autocomplete="on" required>
                 </div>
                 <div class="input-block">
                   <label for="address">Adresse *</label>
-                  <input name="address" id="address" type="text" autocomplete="on" required value="Rue de la Limite, 1">
+                  <input name="address" id="address" type="text" autocomplete="on" required>
                 </div>
                 <div class="input-block">
                   <label for="postcode">Code Postal *</label>
-                  <input name="postcode" id="postcode" type="text" autocomplete="on" required value="1300">
+                  <input name="postcode" id="postcode" type="text" autocomplete="on" required>
                 </div>
                 <div class="input-block">
                   <label for="signup-password">Mot de passe **</label>
