@@ -18,6 +18,10 @@ body {
     margin: 0px;
     color: white;
 }
+.main_logo {
+    width: 1000px;
+    height: auto;
+}
 
 body.homePage {
     background-image: url("../Images/main_background.jpg");
@@ -25,7 +29,7 @@ body.homePage {
 
 a.homePage {
     color: red;
-    font-size: 18px;
+    font-size: 40px;
     display: block;
     margin-top: 30px;
     text-align: center;
@@ -36,6 +40,8 @@ a.homePage {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    height: 620px;
+    width: auto;
 }
 
 #small_logo {

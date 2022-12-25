@@ -10,7 +10,7 @@
 </head>
 <body class="homePage">
     <div class="centered">
-        <img src="../Images/main_logo.png"/>
+        <img class="main_logo" src="../Images/main_logo.png"/>
         <a class="homePage" href="menu_pizzas.php">Voir le menu</a>
     </div>
 </body>

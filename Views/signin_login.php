@@ -10,7 +10,7 @@
 
 </head>
 <body>           
-    <a href="menu_pizzas.php"><img src="../Images/main_logo.png" id="main_logo"></a>
+    <a href="menu_pizzas.php"><img src="../Images/small_logo.png" id="main_logo"></a>
 	    <section class="forms-section">
         <div class="forms">
           <div class="form-wrapper is-active">
