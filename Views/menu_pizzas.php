@@ -39,7 +39,9 @@
         }
         //echo "test";
         //session_destroy();
+
         ?>
+
     </div>
     <footer class="footer">
         <ul class="footer__nav">
