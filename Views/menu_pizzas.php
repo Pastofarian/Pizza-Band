@@ -29,7 +29,7 @@ $supp = ["Oeuf"=>17, "Champignon"=>20, "Ananas"=>22];
 ?>
 <div class="container_menu"> 
 <div class="displayFlex"> 
-<form id="order" method="post" action="order.php">
+<form id="order" method="post" action="menu_pizzas.php">
 <label for="cars">Choisissez votre pizza:</label><br>
 <select name="pizza" id="pizza" size="0" form="order">
 <?php foreach ($pizzas as $key => $value) 
@@ -128,7 +128,7 @@ if(!empty($_SESSION["order"]))
     }
     echo "<br>";
     // Donne la possibilité de supprimer sa commande en entier (devrait pouvoir supprimer 1 order line et pas toute l'order mais je n'arrive pas à transmettre l'index à la fonction) Fait appel à ajax.php et scripts.js
-    echo '<a href="" onclick="myAjax()" class="deletebtn">Annuler sa commande</a>';
+    echo '<a href="#" onclick="myAjax" class="deletebtn">Annuler sa commande</a>';
     echo "<br>";
     echo '<input type="submit" value="Passer commande">';
 }
