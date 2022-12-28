@@ -24,7 +24,7 @@
 
 session_start();
 $pizzas = ["Marguerita"=>17, "Quatro Stagioni"=>20, "Reine"=>22, "Calzone"=>18, "Capriocciosa"=>18, "Saumon"=>23, "Caprese"=>13, "Pepperoni"=>15]; 
-$supp = ["Oeuf"=>17, "Champignon"=>20, "Ananas"=>22];
+$supp = ["Oeuf"=>17, "Champignon"=>20, "Ananas"=>22, "Olive"=>22, "Câpre"=>22, "Salami"=>10];
 
 ?>
 <div class="container_menu"> 
@@ -58,12 +58,29 @@ $supp = ["Oeuf"=>17, "Champignon"=>20, "Ananas"=>22];
         break;
       case 'Quatro Stagioni':
         $('#supp option[value="Champignon"]').show();
+        $('#supp option[value="Olive"]').show();
+        $('#supp option[value="Câpre"]').show();
+
         break;
       case 'Reine':
         $('#supp option[value="Oeuf"]').show();
         $('#supp option[value="Champignon"]').show();
         break;
-      default:
+      case 'Calzone':
+        $('#supp option[value="Olive"]').show();
+        break;
+      case 'Capriocciosa':
+        $('#supp option[value="Olive"]').show();
+        $('#supp option[value="Oeuf"]').show();
+        break;
+      case 'Caprese':
+        $('#supp option[value="Câpre"]').show();
+        $('#supp option[value="Oeuf"]').show();
+        break;
+      case 'Pepperoni':
+        $('#supp option[value="Salami"]').show();
+        break;
+        default:
         break;
     }
   });
@@ -124,6 +141,7 @@ if(!empty($_SESSION["order"]))
                 echo $supp;
                 echo "<br>";
                 }
+                echo "<br>";
             }
     }
     echo "<br>";
