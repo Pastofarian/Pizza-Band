@@ -1,0 +1,46 @@
+.user-profile {
+    padding: 50px;
+    color: white;
+    background-color: black;
+    border: 1px solid #DD7835;
+    border-radius: 10px;
+    opacity: 0.9;
+    margin: 100px;
+}
+
+.user-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
+
+.user-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-info li {
+    margin-bottom: 10px;
+}
+
+.user-info .info-title {
+    font-weight: bold;
+    color: #DD7835;
+}
