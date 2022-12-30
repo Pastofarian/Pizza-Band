@@ -1,0 +1,78 @@
+body {
+    background-image: url("../Images/main_background.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    font-family: Arial;
+    margin: 0px;
+    color: white;
+}
+
+form {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #DD7835;
+    ;
+}
+
+select {
+    padding: 8px;
+    font-size: large;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 22%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #DD7835;
+    border: none;
+    color: white;
+    padding: 8px 18px;
+    margin: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover {
+    background-color: #DD7835;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.checkBox {
+    margin: 20px;
+}
+
+input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+}

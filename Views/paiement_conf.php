@@ -81,7 +81,7 @@
         </ul>
     </footer>
     <div>
-        <p id="copyright">&copy; 2022 Pizza Mama. All rights reserved.</p>
+        <p id="copyright">&copy; 2022 Pizza Band. All rights reserved.</p>
     </div>
 </body>
 </html>
