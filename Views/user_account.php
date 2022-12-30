@@ -23,7 +23,7 @@
          <div class="displayFlex">
             <div class="user-profile">
                <div class="user-avatar">
-                  <img src="https://images.firstwefeast.com/complex/image/upload/kzumczjzaufqzg7stno7.jpg" alt="image de profile">
+                  <img src="../Images/profile_picture.jpg" alt="image de profile">
                </div>
                <h2 class="user-name">Informations de votre compte</h2>
                <ul class="user-info">
