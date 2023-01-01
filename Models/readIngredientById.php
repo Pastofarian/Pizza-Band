@@ -1,6 +1,6 @@
 <?php
 include_once 'connection.php';
-function readIngredient($id){
+function readIngredientById($id){
     $query = "SELECT * FROM `Ingredient` WHERE id = :id";
     $query_params = array(
         ':id'=>$id
@@ -15,3 +15,4 @@ function readIngredient($id){
     $result = $stmt->fetchall();
     return (!empty($result)) ? $result: 'NULL';
 }
+

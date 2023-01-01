@@ -339,3 +339,38 @@ form {
     cursor: pointer;
   }
   
+  #panierjson {
+    background-color: black;
+    border: 1px solid #DD7835;
+    border-radius: 10px;
+    opacity: 0.9;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  
+  #panierjson label {
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+    margin-bottom: 0.5em;
+  }
+  
+  #panierjson input[type="number"] {
+    width: 80px;
+    height: 40px;
+    border: 1px solid #DD7835;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  
+  #panierjson input[type="submit"] {
+    width: 320px;
+    height: 40px;
+    background-color: #DD7835;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

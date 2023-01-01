@@ -1,5 +1,8 @@
 <?php
-
+include '../Models/readIngredientbyId.php';
+include '../Models/readPizzaById.php';
+include '../Models/readPizzas.php';
+include '../Models/readIngredients.php';
 include("../Models/read.php");
 
 //Check si toutes les données du formulaire sont bien remplie
@@ -118,5 +121,17 @@ function checkDob($dob){
    }
  return $message;
 }
+
+function deleteOrderLine($index)
+{
+    unset($_SESSION["order"][$index]);
+}
+
+
+function addOrderLine($values)
+{
+    array_push($_SESSION["order"], $values);
+}
+
 
 ?>
