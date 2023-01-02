@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-include("../Functions/functions.php");
-include("../Model/read.php"); 
+include("../Models/readUsers.php"); 
 
-$result = recupAllInfoAdmin();
+$result = readUsers();
 
 $birthDate;
 $currentDate = date("Y-m-d");

@@ -1,10 +1,8 @@
 <?php
 include_once 'connection.php';
-function readIngredient($id){
-    $query = "SELECT * FROM `Ingredient` WHERE id = :id";
-    $query_params = array(
-        ':id'=>$id
-    );
+function readPizzas(){
+    $query = "SELECT * FROM `Pizza`";
+    $query_params = array();
     try {
         $stmt = getPDO()->prepare($query);
         $result = $stmt->execute($query_params);

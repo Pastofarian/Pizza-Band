@@ -9,7 +9,7 @@ function recupAllInfoAdmin(){
   $query_params = array();
   try
   {
-      $stmt = $db->prepare($query);
+      $stmt = getPDO()->prepare($query);
       $result = $stmt->execute($query_params);
   }
   catch(PDOException $ex){

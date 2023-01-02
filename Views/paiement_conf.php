@@ -18,8 +18,12 @@
     <div class="menu_title">
         <h1>Confirmation de paiement</h1>
     </div>
+
     Merci ! Votre commande n°XX est confirmée. 
     <a class="homePage" href="menu_pizzas.php">Voir le menu</a>
+
+
+
     <footer class="footer">
         <ul class="footer__nav">
             <li>
@@ -28,9 +32,11 @@
             <li>
                 <p>Mardi - Samedi</p>
             </li>
+
             <li>
                 <p>12:00 - 14:00</p>
             </li>
+
             <li>
                 <p>19:00 - 21:30</p>
             </li>
@@ -43,9 +49,11 @@
             <li>
                 <p>Le 7 & 8 juin
             </li>
+
             <li>
                 <p>Du 17 au 31 juillet inclus</p>
             </li>
+
             <li>
                 <p>Du 17 au 26 Septembre inclus</p>
             </li>
@@ -58,9 +66,11 @@
             <li>
                 <p>1 rue de la limite
             </li>
+
             <li>
                 <p>1300 Wavre</p>
             </li>
+
             <li>
                 <p>Belgique</p>
             </li>
@@ -72,16 +82,18 @@
             <li>
                 <a class="nav__title" href="https://www.facebook.com/" target="_blank">Facebook</a>
             </li>
+
             <li>
                 <a class="nav__title" href="https://www.instagram.com/" target="_blank">Instagram</a>
             </li>
+
             <li>
                 <a class="nav__title" href="https://twitter.com/" target="_blank">Twitter</a>
             </li>
         </ul>
     </footer>
     <div>
-        <p id="copyright">&copy; 2022 Pizza Band. All rights reserved.</p>
+        <p id="copyright">&copy; 2022 Pizza Mama. All rights reserved.</p>
     </div>
 </body>
 </html>
