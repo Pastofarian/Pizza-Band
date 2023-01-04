@@ -31,7 +31,7 @@ function refresh() {
                     parentContainer.appendChild(container);
                     let btnCancelOrderline = document.createElement('button');
                     btnCancelOrderline.setAttribute('class', 'deletebtn'); //class pour styler le button delete
-                    btnCancelOrderline.innerHTML = 'X'
+                    btnCancelOrderline.innerHTML = 'Annuler'
                     btnCancelOrderline.setAttribute('orderlineindex', i);
                     parentContainer.appendChild(btnCancelOrderline);
 
