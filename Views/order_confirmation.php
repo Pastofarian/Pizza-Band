@@ -13,4 +13,8 @@
          <a class="homePage" href="../Controlers/orderline.php">Retourner au menu</a>
       </div>
    </body>
+   <?php 
+         include('footer.php')
+
+         ?>
 </html>

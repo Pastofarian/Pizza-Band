@@ -4,7 +4,7 @@
         //     return $_SESSION["PDO"];
         $db;
         $username = "root";
-        $password = "toto";
+        $password = "";
         $host = "localhost";
         $dbname = "Pizzas";
         $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');

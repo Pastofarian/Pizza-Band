@@ -45,14 +45,14 @@ function refresh() {
                                 }
                             }
                         }
-                        httpRequest.open('GET', 'http://localhost/test/Controlers/cancelorderline.php?index=' + i, true);
+                        httpRequest.open('GET', 'http://localhost/Projet%20PHP/test1/Controlers/cancelorderline.php?index=' + i, true);
                         httpRequest.send();
                     })
                 }
             }
         }
     }
-    httpRequest.open('GET', 'http://localhost/test/Controlers/panierjson.php', true);
+    httpRequest.open('GET', 'http://localhost/Projet%20PHP/test1/Controlers/panierjson.php', true);
     httpRequest.send();
 }
 

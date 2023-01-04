@@ -6,7 +6,7 @@ include("../Models/readUsers.php");
 include("../Models/readCities.php");
 include("../Models/readCityById.php");
 include("../Models/insertUser.php");
-
+include ("../Functions/functions.php");
 
 
 //Check si toutes les données du formulaire sont bien remplie
@@ -32,7 +32,7 @@ return $error;
 //check si le log (email) est déjà présent dans la DB
 function duplicates($email){
   $result = readUsers();
-  if(!empty($result)){
+  if($result != 'NULL'){
       $error = "";
       for($i = 0; $i < (count($result)); $i++){
         if($email == $result[$i]['email']){
@@ -43,28 +43,7 @@ function duplicates($email){
   }
 }
 
-//Controle password
-/*Stratégie de mot de passe :
-    - 8 caractères minimum
-    - 1 chiffre minimum
-    - 1 majuscule minimum
-    - 1 minuscule minimum*/
-    function checkPassword($password){
-      $error = "";
-      if (strlen($password) <= '8') {
-          $error = "Votre mot de passe doit contenir au moins 8 caractères !";
-      }
-      elseif(!preg_match("#[0-9]+#",$password)) {
-          $error = "Votre mot de passe doit contenir au moins 1 chiffre !";
-      }
-      elseif(!preg_match("#[A-Z]+#",$password)) {
-          $error = "Votre mot de passe doit contenir au moins 1 majuscule minimum !";
-      }
-      elseif(!preg_match("#[a-z]+#",$password)) {
-          $error = "Votre mot de passe doit contenir au moins 1 minuscule minimum !";
-      }
-      return $error;
-  }
+
 // check si le prenom et le nom sont correctes
 /*    ^[a-zA-z] Can only start with letters. Either small or capital letter.
     [0-9a-zA-Z_]{2,23} Allowed length between 1 and 23. 
@@ -80,14 +59,6 @@ function validateUserId($userName, $id) {
   return $error;
 }
 
-//check la validité de l'email
-function checkEmail($email) {
-  $error = "";
-  if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)){
-    $error = "Erreur dans votre email";
-  }
-  return $error;
-}
 
 function checkCityId($cityId){
     $error = "";
