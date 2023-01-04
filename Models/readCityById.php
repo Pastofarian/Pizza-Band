@@ -1,7 +1,7 @@
 <?php
 include_once 'connection.php';
-function readIngredient($id){
-    $query = "SELECT * FROM `Ingredient` WHERE id = :id";
+function readCityById($id){
+    $query = "SELECT * FROM `City` WHERE id = :id";
     $query_params = array(
         ':id'=>$id
     );

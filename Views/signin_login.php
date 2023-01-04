@@ -1,3 +1,17 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
+{
+   header("Location: ../Controlers/orderline.php");
+}
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
    <head>
@@ -17,17 +31,16 @@
                Connexion
                <span class="underline"></span>
                </button>
-               <form class="form form-login" action="../Controlers/control_signin.php" method="POST">
+               <form class="form form-login" action="../Controlers/signin_login.php" method="POST">
                   <div class="error-message">
                      <?php
-                        session_start();
-                        error_reporting(0);
-                        //if(!isset($_SESSION["error"])){
-                        echo'<pre>';
-                        echo $_SESSION["error"];
-                        echo'<pre>';
-                        //session_destroy();
-                        //}
+                        // error_reporting(0);
+                        if(isset($_SESSION["error"])){
+                           echo'<pre>';
+                           echo $_SESSION["error"];
+                           echo'<pre>';
+                        // session_destroy();
+                        }
                         ?>
                   </div>
                   <fieldset>
@@ -52,55 +65,59 @@
                <form class="form form-signup" action="../Controlers/control_new_account.php" method="POST">
                   <div class="error-message">
                      <?php
-                        session_start();
-                        //error_reporting(0);
-                        
-                        foreach($_SESSION["checkEmpty"] as $key => $value){
-                            echo'<pre>';
-                            echo $key.' -> '.$value.'<br>';
+                        if (isset($_SESSION["checkEmpty"]))
+                        {
+                           foreach($_SESSION["checkEmpty"] as $key => $value){
+                              echo'<pre>';
+                              echo $key.' -> '.$value.'<br>';
+                           }
+                           echo'<pre>';
+                           echo $_SESSION["checkPassword"];
+                           echo'<pre>';
+                           echo $_SESSION["checkIdFn"];
+                           echo'<pre>';
+                           echo $_SESSION["checkIdLn"];
+                           echo'<pre>';
+                           echo $_SESSION["checkEmail"];
+                           echo'<pre>';
+                           echo $_SESSION["checkDob"];
+                           echo'<pre>';
+                           echo $_SESSION["matchPassword"];
+                           echo'<pre>';
+                           echo $_SESSION["checkDuplicates"];
                         }
-                        echo'<pre>';
-                        echo $_SESSION["checkPassword"];
-                        echo'<pre>';
-                        echo $_SESSION["checkIdFn"];
-                        echo'<pre>';
-                        echo $_SESSION["checkIdLn"];
-                        echo'<pre>';
-                        echo $_SESSION["checkEmail"];
-                        echo'<pre>';
-                        echo $_SESSION["checkDob"];
-                        echo'<pre>';
-                        echo $_SESSION["matchPassword"];
-                        echo'<pre>';
-                        echo $_SESSION["checkDuplicates"];
-                        //session_destroy();
+
                         ?>
                   </div>
                   <fieldset>
                      <legend>Entrez votre E-mail, mot de passe et confirmation de mot de passe pour l'inscription</legend>
                      <div class="input-block">
-                        <label for="lastname">Nom *</label>
-                        <input name="lastname" id="lastname" type="text" autocomplete="on" required>
+                        <label for="lastname">Prénom *</label>
+                        <input name="firstname" id="lastname" type="text" autocomplete="on" required>
                      </div>
                      <div class="input-block">
-                        <label for="firstname">Prenom *</label>
-                        <input name="firstname" id="firstname" type="text" autocomplete="on" required>
+                        <label for="firstname">Nom *</label>
+                        <input name="name" id="firstname" type="text" autocomplete="on" required>
                      </div>
                      <div class="input-block">
                         <label for="email">E-mail *</label>
                         <input name="email" id="email" type="email" autocomplete="on" required>
                      </div>
                      <div class="input-block">
-                        <label for="dob">Date de naissance *</label>
-                        <input name="dob" id="dob" type="date" autocomplete="on" required>
-                     </div>
-                     <div class="input-block">
                         <label for="address">Adresse *</label>
                         <input name="address" id="address" type="text" autocomplete="on" required>
                      </div>
                      <div class="input-block">
-                        <label for="postcode">Code Postal *</label>
-                        <input name="postcode" id="postcode" type="text" autocomplete="on" required>
+                        <label for="cityId">Ville</label>
+                        <select name="cityId" id="cityId">
+                           <?php
+                              foreach($_SESSION["citylist"] as $key => $value){
+                           ?>
+                           <option value="<?=$value["id"]?>"><?=$value["name"]?></option>
+                           <?php
+                              }
+                           ?>
+                        </select>
                      </div>
                      <div class="input-block">
                         <label for="signup-password">Mot de passe **</label>
@@ -132,3 +149,6 @@
    })
        
 </script>
+<?php 
+include('footer.php')
+?>

@@ -1,9 +1,9 @@
 <?php
 include_once 'connection.php';
-function readIngredient($id){
-    $query = "SELECT * FROM `Ingredient` WHERE id = :id";
+function readUserByEmail($email){
+    $query = "SELECT * FROM `User` WHERE email = :email";
     $query_params = array(
-        ':id'=>$id
+        ':email'=>$email
     );
     try {
         $stmt = getPDO()->prepare($query);
