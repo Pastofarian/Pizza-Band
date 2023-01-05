@@ -1,3 +1,15 @@
+<?php
+   session_start();
+   
+   if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
+   {
+      header("Location: ../Controlers/orderline.php");
+   }
+   
+   
+   
+   
+   ?>
 <!DOCTYPE html>
 <html lang="fr">
    <head>
@@ -6,6 +18,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Inscription/Connexion</title>
       <link rel="stylesheet" type="text/css" href="../CSS/signin_login.css">
+      <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
       <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
    </head>
    <body>
@@ -17,17 +30,16 @@
                Connexion
                <span class="underline"></span>
                </button>
-               <form class="form form-login" action="../Controlers/control_signin.php" method="POST">
+               <form class="form form-login" action="../Controlers/signin_login.php" method="POST">
                   <div class="error-message">
                      <?php
-                        session_start();
-                        error_reporting(0);
-                        //if(!isset($_SESSION["error"])){
-                        echo'<pre>';
-                        echo $_SESSION["error"];
-                        echo'<pre>';
-                        //session_destroy();
-                        //}
+                        // error_reporting(0);
+                        if(isset($_SESSION["error"])){
+                           echo'<pre>';
+                           echo $_SESSION["error"];
+                           echo'<pre>';
+                        // session_destroy();
+                        }
                         ?>
                   </div>
                   <fieldset>
@@ -52,28 +64,28 @@
                <form class="form form-signup" action="../Controlers/control_new_account.php" method="POST">
                   <div class="error-message">
                      <?php
-                        session_start();
-                        
-                        foreach($_SESSION["checkEmpty"] as $key => $value){
+                        if (isset($_SESSION["checkEmpty"]))
+                        {
+                           foreach($_SESSION["checkEmpty"] as $key => $value){
+                              echo'<pre>';
+                              echo $key.' -> '.$value.'<br>';
+                           }
                            echo'<pre>';
-                           echo $key.' -> '.$value.'<br>';
+                           echo $_SESSION["checkPassword"];
+                           echo'<pre>';
+                           echo $_SESSION["checkIdFn"];
+                           echo'<pre>';
+                           echo $_SESSION["checkIdLn"];
+                           echo'<pre>';
+                           echo $_SESSION["checkEmail"];
+                           echo'<pre>';
+                           echo $_SESSION["checkDob"];
+                           echo'<pre>';
+                           echo $_SESSION["matchPassword"];
+                           echo'<pre>';
+                           echo $_SESSION["checkDuplicates"];
                         }
-                        echo'<pre>';
-                        echo $_SESSION["checkPassword"];
-                        echo'<pre>';
-                        echo $_SESSION["checkIdFn"];
-                        echo'<pre>';
-                        echo $_SESSION["checkIdLn"];
-                        echo'<pre>';
-                        echo $_SESSION["checkEmail"];
-                        echo'<pre>';
-                        echo $_SESSION["checkDob"];
-                        echo'<pre>';
-                        echo $_SESSION["matchPassword"];
-                        echo'<pre>';
-                        echo $_SESSION["checkDuplicates"];
-                        session_destroy();
-                       
+                        
                         ?>
                   </div>
                   <fieldset>
@@ -99,11 +111,11 @@
                         <select name="cityId" id="cityId">
                            <?php
                               foreach($_SESSION["citylist"] as $key => $value){
-                           ?>
+                              ?>
                            <option value="<?=$value["id"]?>"><?=$value["name"]?></option>
                            <?php
                               }
-                           ?>
+                              ?>
                         </select>
                      </div>
                      <div class="input-block">
@@ -136,3 +148,6 @@
    })
        
 </script>
+<?php 
+   include('footer.php')
+   ?>

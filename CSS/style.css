@@ -166,39 +166,6 @@ h1 {
     cursor: pointer;
 }
 
-/* footer */
-
-.footer {
-    text-align: center;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.800);
-    margin: 0;
-    font-size: 14px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.footer__nav {
-    list-style-type: none;
-}
-
-.nav__title {
-    text-decoration: none;
-    color: white;
-    line-height: 22pt;
-}
-
-#copyright {
-    font-style: italic;
-    text-align: right;
-    padding: 0.5em;
-    background-color: black;
-    color: #ffffff;
-    margin: 0;
-    font-size: small;
-}
-
 /*******menu list*************/
 
 form {

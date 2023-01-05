@@ -17,12 +17,12 @@
       </header>
       <a href="menu_pizzas.php"><img src="../Images/small_logo.png" id="small_logo"></a>
       <div class="menu_title">
-         <h1>Confirmation de paiement</h1>
+         <h1>Mon panier</h1>
       </div>
-      Merci ! Votre commande n°XX est confirmée. 
-      <a class="homePage" href="menu_pizzas.php">Voir le menu</a>
+      <form action="../Controlers/control_basket.php" methode="GET">
+      <input type="submit" value="Passer commande">
       <?php 
-         include('footer.php')
+         include('footer.php');
          ?>
    </body>
 </html>
