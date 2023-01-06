@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let suppSelect = document.querySelector('#suppContainer .fieldData');
     let priceTag = document.querySelector('#pizzaPrice');
     let totalPriceTag = document.querySelector('#totalPrice');
-    console.log(quantityInput);
-    console.log(totalPriceTag);
-    priceTag.innerHTML = 'salut';
     let pizzaContainers = document.querySelectorAll('.pizzaContainer');
     for (let c of pizzaContainers) {
         c.addEventListener('click', function() {
@@ -79,9 +76,7 @@ function updateForm(clickedPizza, quantityInput, pizzaSelect, sizeSelect, doughS
             response
         );
         priceTag.innerHTML = tmp;
-        totalPriceTag.innerHTML = parseFloat(tmp) * parseInt(quantityInput.value);
-        console.log(tmp * parseInt(quantityInput.value));
-        
+        totalPriceTag.innerHTML = parseFloat(tmp) * parseInt(quantityInput.value);        
         quantityInput.addEventListener('change', function() {
             let tmp = computePrice(
                 pizzaSelect.options[pizzaSelect.selectedIndex].value,
@@ -187,7 +182,7 @@ function computePrice(selectedPizzaId, selectedSizeId, selectedDoughId, selected
             }
         }
     }
-    return parseFloat(p['price']) + parseFloat(s['price']) + parseFloat(d['price']) + sps;
+    return parseFloat(p['totalPrice']) + parseFloat(s['price']) + parseFloat(d['price']) + sps;
 }
 
 let request = function (url, onsuccess) {
