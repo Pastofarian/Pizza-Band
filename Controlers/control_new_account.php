@@ -53,7 +53,7 @@ function duplicates($email){
 
 function validateUserId($userName, $id) {
   $error = "";
-  if(!preg_match('/^[a-zA-Z][0-9a-zA-Z_]{1,23}[0-9a-zA-Z]$/', $userName)) {
+  if(!preg_match('/^[a-zA-Z][0-9a-zA-Z_ ]{1,100}[0-9a-zA-Z]$/', $userName)) {
     $error = "Erreur dans votre " . $id;
   }
   return $error;

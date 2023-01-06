@@ -1,5 +1,3 @@
-
-console.log('test');
 document.addEventListener('DOMContentLoaded', (event) => {
     // document.getElementById("btnpanierjson").addEventListener("click", function(e){
     refresh();
@@ -13,6 +11,7 @@ function refresh() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             const status = httpRequest.status;
             if (status === 0 || (status >= 200 && status < 400)) {
+                console.log(httpRequest.responseText);
                 let response = JSON.parse(httpRequest.responseText);
                 let parentContainer = document.getElementById("panierjson");
 
@@ -45,14 +44,14 @@ function refresh() {
                                 }
                             }
                         }
-                        httpRequest.open('GET', 'http://localhost/Projet%20PHP/test1/Controlers/cancelorderline.php?index=' + i, true);
+                        httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/cancelorderline.php?index=' + i, true);
                         httpRequest.send();
                     })
                 }
             }
         }
     }
-    httpRequest.open('GET', 'http://localhost/Projet%20PHP/test1/Controlers/panierjson.php', true);
+    httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/panierjson.php', true);
     httpRequest.send();
 }
 

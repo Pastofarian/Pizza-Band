@@ -1,3 +1,9 @@
+<?php
+   session_start();
+   if (!isset($_SESSION['user']))
+      header('Location: ../Controlers/user_account.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -6,6 +12,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="../CSS/style.css">
       <link rel="stylesheet" href="../CSS/user_account.css">
+      <script type="text/javascript" src="../Functions/panierjsonscript.js"></script>
       <title>Compte utilisateur</title>
    </head>
    <body>
@@ -55,41 +62,9 @@
                </ul>
             </div>
          </div>
-         <div class="displayFlex">
-            <form id="sendorder" method="post" action="/controlerconfig.php">
-               <div id="basket"> Votre panier : </div>
-               <?php 
-                  session_start();
-                  // Passe en revue chaque ligne de commande (tableau) et affiche les informations relatives à la commandes
-                  if(!empty($_SESSION["order"]))
-                  {
-                      foreach($_SESSION["order"] as $key => $orderline)
-                      {
-                          echo $orderline["qty"];
-                          echo " ";
-                          echo $orderline["pizza"];
-                          echo "<br>";
-                          if(array_key_exists("supp", $orderline))
-                              {
-                                  echo "Suppléments : ";
-                                  echo "<br>";
-                                  foreach($orderline["supp"] as $supp)
-                                  {
-                                  echo $supp;
-                                  echo "<br>";
-                                  }
-                                  echo "<br>";
-                              }
-                      }
-                      echo "<br>";
-                      // Donne la possibilité de supprimer sa commande en entier (devrait pouvoir supprimer 1 order line et pas toute l'order mais je n'arrive pas à transmettre l'index à la fonction) Fait appel à ajax.php et scripts.js
-                      echo '<a href="#" onclick="myAjax" class="deletebtn">Annuler sa commande</a>';
-                      echo "<br>";
-                      echo '<input type="submit" value="Passer commande">';
-                  }
-                  ?>
-            </form>
-         </div>
+         <?php
+         include 'panier.php';
+         ?>
       </div>
       <?php 
          include('footer.php')

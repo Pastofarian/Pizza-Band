@@ -21,6 +21,7 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       <link rel="stylesheet" href="../CSS/style.css">
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script type="text/javascript" src="../Functions/panierjsonscript.js"></script>
+      <script type="text/javascript" src="../Functions/listingpizzas.js"></script>
       <title>Menu des pizzas</title>
    </head>
    <body>
@@ -37,20 +38,14 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       <div class="container_menu">
          
          <?php 
-
-
-         include('orderline.php');
-         
-         include('panier.php');
-
-
-
+            include('test_orderline.php');    
+            include('panier.php');
          ?>
 
-         </div>
-         <?php 
+      </div>
+      <?php 
          include('footer.php');
-         ?>
+      ?>
    
 
    </body>

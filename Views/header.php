@@ -10,7 +10,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
     ?> 
         <header>
             <div class="container">
-                <a href="user_account.php"><span id="myaccount">Mon compte</span></a>
+                <a href="../Controlers/user_account.php"><span id="myaccount">Mon compte</span></a>
                 <a href="../Controlers/disconnect.php"><span id="disconnect">Se déconnecter</span></a>
             </div>
         </header>

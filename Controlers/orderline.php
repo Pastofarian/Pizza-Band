@@ -6,8 +6,17 @@
     include_once('../Models/readPizzaById.php');
     include_once('../Models/readPizzas.php');
     include_once('../Models/readIngredients.php');
+    include_once('../Models/readIngredientsByPizzaId.php');
+    include_once('../Models/readPizzaTotalPriceById.php');
 
-    $_SESSION["pizzasList"] = readPizzas();
+    $pizzas = readPizzas();
+    if ($pizzas == 'NULL')
+        $pizzas = array();
+    for ($i = 0; $i < count($pizzas); $i++) {
+        $pizzas[$i]['ingredients'] = readIngredientsByPizzaId($pizzas[$i]['id']);
+        $pizzas[$i]['totalPrice'] = readPizzaTotalPriceById($pizzas[$i]['id'])[0]['price'];
+    }
+    $_SESSION["pizzasList"] = $pizzas;
     $_SESSION["suppList"] = readIngredients();
 
     $currentOrder = [];

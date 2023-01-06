@@ -2,10 +2,13 @@
 
 session_start();
 
+$relativePath;
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
-{
-   header("Location: ../Controlers/orderline.php");
-}
+   $relativePath = '../Controlers/orderline.php';
+if(!isset($_SESSION['citylist']))
+   $relativePath = '../Controlers/signin_login.php';
+if (isset($relativePath))
+   header('Location: '.$relativePath);
 
 
 
@@ -79,8 +82,6 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
                            echo $_SESSION["checkIdLn"];
                            echo'<pre>';
                            echo $_SESSION["checkEmail"];
-                           echo'<pre>';
-                           echo $_SESSION["checkDob"];
                            echo'<pre>';
                            echo $_SESSION["matchPassword"];
                            echo'<pre>';
