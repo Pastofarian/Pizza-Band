@@ -19,9 +19,8 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="../CSS/style.css">
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script type="text/javascript" src="../Functions/panierjsonscript.js"></script>
-      <script type="text/javascript" src="../Functions/listingpizzas.js"></script>
+      <script type="text/javascript" src="../Functions/panierjsonscript.js" defer></script>
+      <script type="text/javascript" src="../Functions/listingpizzas.js" defer></script>
       <title>Menu des pizzas</title>
    </head>
    <body>
@@ -45,8 +44,7 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       </div>
       <?php 
          include('footer.php');
+         include('orderLineForm.php');
       ?>
-   
-
    </body>
 </html>
