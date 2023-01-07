@@ -20,16 +20,16 @@
     $_SESSION["suppList"] = readIngredients();
 
     $currentOrder = [];
-    $url = '';
 
     if(!isset($_SESSION["order"]))
     {
           $_SESSION["order"] = [];
     }
 
-    var_dump($_POST);
+    //partie déplacée vers un controleur appelé par le javascript 
+    //var_dump($_POST);
 
-    if(isset($_POST))
+    /*if(isset($_POST))
     {
         if(isset($_POST['pizza']) && checkPizza($_POST['pizza']) &&
             isset($_POST['qty']) && checkQty($_POST['qty']) &&
@@ -42,7 +42,7 @@
             }
             array_push($_SESSION['order'], $currentOrder);
         }
-    }
+    }*/
 
     header('Location: ../Views/menu_pizzas.php');
 

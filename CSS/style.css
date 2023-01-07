@@ -1,33 +1,83 @@
 ﻿/* li {
     color: blue;
 } */
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Sevillana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;700&family=Roboto&display=swap');
 body {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-        url("../Images/menu_background.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    /*background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url("../Images/menu_background.jpg");*/
+    background-image: url('../images/menu_background.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    font-family: 'Roboto', sans-serif;
-    margin: 0px;
-    color: white;
+    /*-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+    /*background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;*/
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    color: black;
+    min-width: 600px;
+}
+select {
+    font-family: 'Quicksand', sans-serif;
+}
+
+#backgroundFilter {
+    pointer-events:none;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    background-color:rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.container_menu {
+    margin:auto;
+    width:95%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.container_menu>#menu{
+    flex:3;
+    overflow: scroll;
+}
+
+.container_menu>#panier{
+}
+
+.container_menu>#panier>#panierjson{
+    height:100%;
+    background-color: rgba(255,255,255,0.7);
+    overflow: scroll;
+}
+
+.container_menu h2 {
+    font-weight: 300;
+    font-size: 2em;
+    text-align: center;
+    color:white;
+    border-bottom: 1px solid white;
 }
 
 body.homePage {
     background-image: url("../Images/main_background.jpg");
 }
 
-a.homePage {
+/*a.homePage {
     color: red;
     font-size: 18px;
     display: block;
     margin-top: 30px;
     text-align: center;
-}
+}*/
 
 .centered {
     position: fixed;
@@ -36,17 +86,24 @@ a.homePage {
     transform: translate(-50%, -50%);
 }
 
-#small_logo {
+/*#small_logo {
     margin-left: 35px;
     margin-top: 25px;
 
+}*/
+
+header {
+    background-image: url('../images/main_logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    height:215px;
+    background-color: white;
+    opacity:0.9;
 }
 
-h1 {
+header h1 {
     color: white;
-    background-color: #DD7835;
-    display: inline;
-    padding: 8px 22px;
+    display: inline-block;
     font-size: 45px;
 }
 
@@ -165,37 +222,6 @@ h1 {
     margin: 20px 20px;
     cursor: pointer;
 }
-
-/* footer */
-
-.footer {
-    text-align: center;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.800);
-    margin: 0;
-    font-size: 14px;
-}
-
-.footer__nav {
-    list-style-type: none;
-}
-
-.nav__title {
-    text-decoration: none;
-    color: white;
-    line-height: 22pt;
-}
-
-#copyright {
-    font-style: italic;
-    text-align: right;
-    padding: 0.5em;
-    background-color: black;
-    color: #ffffff;
-    margin: 0;
-    font-size: small;
-}
-
 /*******menu list*************/
 
 /*form {
@@ -254,7 +280,7 @@ select {
     top: 0px;
     left: 0px;
     width: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     min-height: 100%;
@@ -274,13 +300,22 @@ select {
     margin:auto;
     background-color: white;
     height: 80%;
+    display: none;
+    flex-direction: column;
+    gap:1em;
     z-index: 3;
     padding: 1em;
 }
 
+.formWindow select, .formWindow input{
+    border:0;
+    background-color:grey;
+    color:white;
+    border-radius: 0;
+}
+
 .formWindow .fieldContainer .subContainer{
     display: flex;
-    color:black;
 }
 
 .formWindow .fieldContainer .subContainer *{
@@ -291,18 +326,16 @@ select {
 .formWindow .fieldContainer {
     display: flex;
     align-items: stretch;
-    color:black;
+    border:1px solid black;
 }
 
 .formWindow .fieldContainer .fieldLabel {
     flex:1;
-    color: black;
     text-align: center;
 }
 
 .formWindow .fieldContainer .fieldData {
     flex:2;
-    color:black;
 }
 
 .formWindow .fieldContainer .inlineField {
@@ -343,173 +376,12 @@ input[type="submit"] {
     height: 95px;
 }
 
-.container_menu {
-    margin:auto;
-    width:85%;
-    display: flex;
-    align-items: center;
-}
+
 
 .displayFlex {
     flex-direction: row;
     justify-content: space-between;
     flex: 1;
-}
-
-/*****Panier *****/
-
-#basket {
-    color: #DD7835;
-}
-
-form#sendorder {
-    background-color: black;
-    border: 1px solid #DD7835;
-    border-radius: 10px;
-    opacity: 0.9;
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
-}
-
-form#sendorder label {
-    font-weight: bold;
-    font-size: 25px;
-    display: block;
-    margin-bottom: 0.5em;
-}
-
-form#sendorder input[type="number"] {
-    width: 80px;
-    height: 40px;
-    border: 1px solid #DD7835;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-form#sendorder input[type="submit"] {
-    width: 320px;
-    height: 40px;
-    background-color: #DD7835;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#panierjson {
-    padding: 50px;
-    background-color: black;
-    border: 1px solid #DD7835;
-    border-radius: 10px;
-    opacity: 0.9;
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
-    flex:1;
-}
-
-#listingpizzas {
-    display: grid;
-    grid-template-columns: repeat(3, 250px);
-    grid-template-rows: repeat(4, 200px);
-    grid-template: grid-template-rows;
-    gap: 30px;
-    flex:3;
-    padding:5px;
-    background-color: rgba(0,0,0,0.5);
-    border: 1px solid #DD7835;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
-    overflow-y: scroll;
-}
-
-#listingpizzas .pizzaContainer {
-    background-color:rgba(255,255,255,0.1);
-    border:1px solid #DD7835;
-    cursor: pointer;
-    border-radius: 10px;
-    /*overflow: scroll;*/
-    -ms-overflow-style: none;
-    scrollbar-width: none; 
-}
-
-#listingpizzas .pizzaContainer::-webkit-scrollbar {
-    display: none;
-}
-
-#listingpizzas .pizzaContainer .title{
-    color:#DD7835;
-    border-bottom:1px solid #DD7835;
-    margin:0.3em;
-    text-align: center;
-    font-size:1em;
-    font-family: 'Sevillana', cursive;
-    text-shadow: 0 0 1px black;
-    letter-spacing: 1px;
-}
-
-#listingpizzas .pizzaContainer .price {
-    text-align: center;
-    font-size: 0.7em;
-    display: inline-block;
-    width:100%;
-}
-
-#listingpizzas .pizzaContainer .ingredientList{
-    font-size: 0.6em;
-    list-style-type: none;
-    padding-left:0.5em;
-    padding-right:0.5em;
-    max-height: 100px;
-    overflow: scroll;
-    /*-ms-overflow-style: none;
-    scrollbar-width: none; */
-}
-/*#listingpizzas .pizzaContainer .ingredientList::-webkit-scrollbar{
-    display: none;
-}*/
-
-#listingpizzas .pizzaContainer .ingredientList li{
-    padding:0;
-    margin:0;
-    display:flex;
-    border-bottom:1px solid #DD7835;
-}
-
-#listingpizzas .pizzaContainer .ingredientList li .ingredientName{
-    flex:1;
-}
-
-#listingpizzas .pizzaContainer .ingredientList li .flagContainer{
-    gap:2px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    align-content: flex-end;
-    justify-content:flex-end;
-    /*display: inline-block;*/
-    text-align: right;
-    flex:1;
-}
-#listingpizzas .pizzaContainer .ingredientList li .flagContainer .flag{
-    background-color: white;
-    border-radius: 3px;
-    color:black;
-    font-size: 0.6em;
-    padding: 2px;
-    border:1px solid #DD7835;
-}
-#listingpizzas .pizzaContainer .ingredientList li .flagContainer .glutenFlag{
-    background-color: orange;
-    color:black;
-}
-#listingpizzas .pizzaContainer .ingredientList li .flagContainer .vegeFlag{
-    background-color: white;
-    color:green;
 }
 
 #orderConfirmation {

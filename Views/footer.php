@@ -1,5 +1,5 @@
 
-<footer class="footer">
+<footer>
     <div id="footer_infos">
         <ul class="footer__nav">
             <li>
@@ -16,7 +16,6 @@
             </li>
         </ul>
         <ul class="footer__nav">
-            <li class="nav__item">
             <li>
                 <h2>Fermeture annuelle</h2>
             </li>
@@ -31,7 +30,6 @@
             </li>
         </ul>
         <ul class="footer__nav">
-            <li class="nav__item">
             <li>
                 <h2>Pizza Mama</h2>
             </li>

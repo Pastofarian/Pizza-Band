@@ -19,32 +19,36 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="../CSS/style.css">
-      <script type="text/javascript" src="../Functions/panierjsonscript.js" defer></script>
+      <link rel="stylesheet" href="../CSS/nav.css">
+      <link rel="stylesheet" href="../CSS/kanban.css">
+      <link rel="stylesheet" href="../CSS/footer.css">
+      <link rel="stylesheet" href="../CSS/panier.css">
       <script type="text/javascript" src="../Functions/listingpizzas.js" defer></script>
       <title>Menu des pizzas</title>
    </head>
    <body>
-
+      <header></header>
       <?php
-      include('header.php');
+         include('nav.php');
       ?>
-      <a href="menu_pizzas.php"><img src="../Images/small_logo.png" id="small_logo"></a>
-      <div class="menu_title">
-         <h1>Les Pizzas</h1>
-      </div>
-
-
       <div class="container_menu">
-         
-         <?php 
-            include('test_orderline.php');    
-            include('panier.php');
-         ?>
-
+         <div id="menu">
+            <h2>Nos Pizzas</h2>
+            <?php 
+               include('kanban.php');    
+            ?>
+         </div>
+         <div id="panier">
+            <h2>Panier</h2>
+            <div id="panierjson">
+            </div>
+         </div>
       </div>
       <?php 
          include('footer.php');
          include('orderLineForm.php');
       ?>
+      <div id="backgroundFilter">
+      </div>
    </body>
 </html>

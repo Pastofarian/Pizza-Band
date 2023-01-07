@@ -1,0 +1,33 @@
+footer {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.800);
+    margin-top: 3em;
+    font-size: 14px;
+}
+
+footer #footer_infos {
+    display: flex;
+    flex-direction: row;
+}
+
+footer #footer_infos .footer__nav{
+    list-style-type: none;
+    flex:1;
+}
+
+.nav__title {
+    text-decoration: none;
+    color: white;
+    line-height: 22pt;
+}
+
+#copyright {
+    font-style: italic;
+    text-align: center;
+    padding: 0.5em;
+    background-color: black;
+    color: #ffffff;
+    margin: 0;
+    font-size: small;
+}

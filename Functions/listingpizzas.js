@@ -1,45 +1,63 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    refreshBasket();
     let window = document.querySelector('.formWindow');
-    window.style.display = 'none';
     let filter = document.querySelector('.filter');
-    filter.style.display = 'none';
-    let quantityInput = document.querySelector('.formWindow #quantityField');
-    quantityInput.value = "1";
-    let pizzaSelect = document.querySelector('#pizzaContainer .fieldData');
-    let sizeSelect = document.querySelector('#sizeContainer .fieldData');
-    let doughSelect = document.querySelector('#doughContainer .fieldData');
-    let suppSelect = document.querySelector('#suppContainer .fieldData');
-    let priceTag = document.querySelector('#pizzaPrice');
-    let totalPriceTag = document.querySelector('#totalPrice');
+    let fields = {
+        'quantity' : document.querySelector('.formWindow #quantityField'),
+        'pizza' : document.querySelector('#pizzaContainer .fieldData'),
+        'size' : document.querySelector('#sizeContainer .fieldData'),
+        'dough' : document.querySelector('#doughContainer .fieldData'),
+        'supps' : document.querySelector('#suppContainer .fieldData'),
+        'price' : document.querySelector('#pizzaPrice'),
+        'totalPrice' : document.querySelector('#totalPrice'),
+        'send' : document.querySelector('#sendOrderLine'),
+    } 
     let pizzaContainers = document.querySelectorAll('.pizzaContainer');
+    fields['send'].addEventListener('click', function(){
+        let post = {
+            'pizzaId':fields['pizza'].value,
+            'doughId':fields['dough'].value,
+            'sizeId':fields['size'].value,
+            'suppIds':getSelectedValues(fields['supps']),
+            'quantity':fields['quantity'].value
+        }
+        postRequest('http://localhost:8888/mainbranch/Controlers/orderline_test.php', function(httpRequest) {
+            refreshBasket();
+        }, post);
+    });
     for (let c of pizzaContainers) {
         c.addEventListener('click', function() {
+            removeAllOptions(fields['pizza']);
+            removeAllOptions(fields['dough']);
+            removeAllOptions(fields['size']);
+            fields['quantity'].value = '1';
             filter.style.display = 'flex';
-            window.style.display = 'block';
+            window.style.display = 'flex';
             updateForm(
                 this,
-                quantityInput,
-                pizzaSelect,
-                sizeSelect,
-                doughSelect,
-                suppSelect,
-                priceTag,
-                totalPriceTag
+                fields
             );
             filter.addEventListener('click', function (e) {
                 if (e.target === e.currentTarget) {
                     filter.style.display = 'none';
                     window.style.display = 'none';
+                    // supprimer le contenu des différents selects et prix
+                }
+            });
+            fields['send'].addEventListener('click', function (e) {
+                if (e.target === e.currentTarget) {
+                    filter.style.display = 'none';
+                    window.style.display = 'none';
+                    // supprimer le contenu des différents selects et prix
                 }
             });
         });
     }
 });
 
-function updateForm(clickedPizza, quantityInput, pizzaSelect, sizeSelect, doughSelect, suppSelect, priceTag, totalPriceTag) {
+function updateForm(clickedPizza, fields) {
     let clickedPizzaId = clickedPizza.getAttribute('pizzaid');
-    //Ces données pourraient être directement écrite via le php
-    //Requête simple pour obtenir toutes les informations nécessaire au remplissage du formulaire
+
     request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson.php', function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         //Création des élements dom options des différents champs select en utilisant la réponse de la requête
@@ -47,93 +65,54 @@ function updateForm(clickedPizza, quantityInput, pizzaSelect, sizeSelect, doughS
             let newOpt = document.createElement('option');
             newOpt.value = pizza['id'];
             newOpt.innerHTML = pizza['name'] + ' (' + pizza['totalPrice'] + '€)';
-            pizzaSelect.appendChild(newOpt);
+            fields['pizza'].appendChild(newOpt);
+        }
+        for (let option in fields['pizza'].options) {
+            if (fields['pizza'].options[option].value == clickedPizzaId) {
+                fields['pizza'].selectedIndex = option;
+            }
         }
         for (let dough of response['doughs']) {
             let newOpt = document.createElement('option');
             newOpt.value = dough['id'];
             newOpt.innerHTML = dough['name'] + ' (+' + dough['price'] + '€)';
-            doughSelect.appendChild(newOpt);
+            fields['dough'].appendChild(newOpt);
         }
         for (let size of response['sizes']) {
             let newOpt = document.createElement('option');
             newOpt.value = size['id'];
             newOpt.innerHTML = size['name'] + ' (+' + size['price'] + '€)';
-            sizeSelect.appendChild(newOpt);
+            fields['size'].appendChild(newOpt);
         }
-        //Pré-sélection de la pizza qui a été cliquée
-        for (let option in pizzaSelect.options) {
-            if (pizzaSelect.options[option].value == clickedPizzaId) {
-                pizzaSelect.selectedIndex = option;
+        fillSupplements(fields['supps'], fields['pizza'].options[fields['pizza'].selectedIndex].value);
+        setPricesHTML(fields, response);
+        
+        fields['quantity'].addEventListener('change', function() {
+            if (fields['quantity'].value == '' || isNaN(fields['quantity'].value)) {
+                fields['quantity'].value = '1';
             }
-        }
-        fillSupplements(suppSelect, pizzaSelect.options[pizzaSelect.selectedIndex].value);
-        let tmp = computePrice(
-            pizzaSelect.options[pizzaSelect.selectedIndex].value,
-            sizeSelect.options[sizeSelect.selectedIndex].value,
-            doughSelect.options[doughSelect.selectedIndex].value,
-            getSelectedValues(suppSelect),
-            response
-        );
-        priceTag.innerHTML = tmp;
-        totalPriceTag.innerHTML = parseFloat(tmp) * parseInt(quantityInput.value);        
-        quantityInput.addEventListener('change', function() {
-            let tmp = computePrice(
-                pizzaSelect.options[pizzaSelect.selectedIndex].value,
-                sizeSelect.options[sizeSelect.selectedIndex].value,
-                doughSelect.options[doughSelect.selectedIndex].value,
-                getSelectedValues(suppSelect),
-                response
-            );
-            priceTag.innerHTML = tmp;
-            totalPriceTag.innerHTML = tmp * parseInt(quantityInput.value);
+            setPricesHTML(fields, response);
         });
-        pizzaSelect.addEventListener('change', function() {
-            fillSupplements(suppSelect, pizzaSelect.options[pizzaSelect.selectedIndex].value)
-            let tmp = computePrice(
-                pizzaSelect.options[pizzaSelect.selectedIndex].value,
-                sizeSelect.options[sizeSelect.selectedIndex].value,
-                doughSelect.options[doughSelect.selectedIndex].value,
-                getSelectedValues(suppSelect),
-                response
-            );
-            priceTag.innerHTML = tmp;
-            totalPriceTag.innerHTML = tmp * parseInt(quantityInput.value);
+        fields['pizza'].addEventListener('change', function() {
+            fillSupplements(fields['supps'], fields['pizza'].options[fields['pizza'].selectedIndex].value)
+            setPricesHTML(fields, response);
         });
-        doughSelect.addEventListener('change', function() {
-            let tmp = computePrice(
-                pizzaSelect.options[pizzaSelect.selectedIndex].value,
-                sizeSelect.options[sizeSelect.selectedIndex].value,
-                doughSelect.options[doughSelect.selectedIndex].value,
-                getSelectedValues(suppSelect),
-                response
-            );
-            priceTag.innerHTML = tmp;
-            totalPriceTag.innerHTML = tmp * parseInt(quantityInput.value);
+        fields['dough'].addEventListener('change', function() {
+            setPricesHTML(fields, response);
         });
-        sizeSelect.addEventListener('change', function() {
-            let tmp = computePrice(
-                pizzaSelect.options[pizzaSelect.selectedIndex].value,
-                sizeSelect.options[sizeSelect.selectedIndex].value,
-                doughSelect.options[doughSelect.selectedIndex].value,
-                getSelectedValues(suppSelect),
-                response
-            );
-            priceTag.innerHTML = tmp;
-            totalPriceTag.innerHTML = tmp * parseInt(quantityInput.value);
+        fields['size'].addEventListener('change', function() {
+            setPricesHTML(fields, response);
         });
-        suppSelect.addEventListener('change', function() {
-            let tmp = computePrice(
-                pizzaSelect.options[pizzaSelect.selectedIndex].value,
-                sizeSelect.options[sizeSelect.selectedIndex].value,
-                doughSelect.options[doughSelect.selectedIndex].value,
-                getSelectedValues(suppSelect),
-                response
-            );
-            priceTag.innerHTML = tmp;
-            totalPriceTag.innerHTML = tmp * parseInt(quantityInput.value);
+        fields['supps'].addEventListener('change', function() {
+            setPricesHTML(fields, response);
         });
     });
+}
+
+function setPricesHTML(fields, datas) {
+    let currentPizzaPrice = computePrice(fields, datas);
+    fields['price'].innerHTML = currentPizzaPrice;
+    fields['totalPrice'].innerHTML = parseFloat(currentPizzaPrice) * parseInt(fields['quantity'].value);
 }
 
 function fillSupplements(suppSelect, selectedPizzaId) {
@@ -152,8 +131,13 @@ function fillSupplements(suppSelect, selectedPizzaId) {
     });
 }
 
-function computePrice(selectedPizzaId, selectedSizeId, selectedDoughId, selectedSuppIds, datas) {
+function computePrice(fields, datas) {
     let p, s, d;
+    let selectedPizzaId = fields['pizza'].options[fields['pizza'].selectedIndex].value;
+    let selectedSizeId = fields['size'].options[fields['size'].selectedIndex].value;
+    let selectedDoughId = fields['dough'].options[fields['dough'].selectedIndex].value;
+    let selectedSuppIds = getSelectedValues(fields['supps']);
+
     for (let pizza of datas['pizzas']) {
         if (pizza['id'] == selectedPizzaId) {
             p = pizza;
@@ -199,6 +183,22 @@ let request = function (url, onsuccess) {
     httpRequest.send();
 }
 
+let postRequest = function (url, onsuccess, datas) {
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            const status = httpRequest.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                onsuccess(httpRequest);
+            }
+        }
+    }
+    httpRequest.open("POST", url, true);
+    httpRequest.setRequestHeader("Accept", "application/json");
+    httpRequest.setRequestHeader("Content-Type", "application/json");
+    httpRequest.send(JSON.stringify(datas));
+}
+
 function getSelectedValues(select) {
     let result = [];
     let options = select && select.options;
@@ -213,3 +213,58 @@ function getSelectedValues(select) {
     }
     return result;
   }
+
+function removeAllOptions(select) {
+    while (select.options.length > 0)
+        select.remove(select.lastChild);
+}
+
+function refreshBasket() {
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            const status = httpRequest.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                let response = JSON.parse(httpRequest.responseText);
+                console.log(response);
+                let parentContainer = document.getElementById("panierjson");
+
+                while (parentContainer.children.length > 0) {
+                    parentContainer.removeChild(parentContainer.children[0])
+                }
+                for (let i in response) {
+                    let container = document.createElement('div');
+                    let pizzaName = document.createElement('div');
+                    pizzaName.setAttribute('id', 'basket'); //id pour styler le panier
+                    pizzaName.innerHTML = response[i]['quantity'] + " x " + response[i]['pizzaId']['name'] + '<br>Suppléments :<br>';
+                    for (let k in response[i]['suppIds']) {
+                        pizzaName.innerHTML += response[i]['suppIds'][k]['name'] + '<br>';
+                    }
+                    container.appendChild(pizzaName);
+                    parentContainer.appendChild(container);
+                    let btnCancelOrderline = document.createElement('button');
+                    btnCancelOrderline.setAttribute('class', 'deletebtn'); //class pour styler le button delete
+                    btnCancelOrderline.innerHTML = 'Annuler'
+                    btnCancelOrderline.setAttribute('orderlineindex', i);
+                    container.appendChild(btnCancelOrderline);
+
+                    btnCancelOrderline.addEventListener("click", function (c) {
+                        let httpRequest = new XMLHttpRequest();
+                        httpRequest.onreadystatechange = function () {
+                            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                                const status = httpRequest.status;
+                                if (status === 0 || (status >= 200 && status < 400)) {
+                                    refreshBasket();
+                                }
+                            }
+                        }
+                        httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/cancelorderline.php?index='+i, true);
+                        httpRequest.send();
+                    })
+                }
+            }
+        }
+    }
+    httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/panierjson.php', true);
+    httpRequest.send();
+}
