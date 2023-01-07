@@ -1,3 +1,10 @@
+<?php
+   session_start();
+   if (!isset($_SESSION['admin']))
+      header('Location: ../Controlers/admin.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -97,6 +104,92 @@
             <input class="checkBox" type="checkbox" id="ingredientVege" name="vegetarian" value="Végétarien">
             Sans Gluten
             <input class="checkBox" type="checkbox" id="ingredientGluten" name="gluten" value="Sans Gluten"><br>
+            <input type="submit" value="Créer">
+         </form>
+      </div>
+      <h1>Administration des pâtes</h1>
+      <div class="form-container">
+         <form id="display" class="form" method="post" action="admin.php">
+            <label for="display">Afficher une pâte</label><br>
+            <select name="pizza" id="pizza" size="0" form="order">
+            <?php foreach ($supp as $key => $value) 
+               {
+                   echo '<option value="' . $key . '">' . $key . '</option>';
+               }
+               ?>
+            <input type="submit" value="Afficher">
+         </form>
+         <form id="update" class="form" method="post" action="admin.php">
+            <label for="display">Modifier une pâte</label><br>
+            <select name="pizza" id="pizza" size="0" form="order">
+            <?php foreach ($supp as $key => $value) 
+               {
+                   echo '<option value="' . $key . '">' . $key . '</option>';
+               }
+               ?>
+            <input type="submit" value="Modifier">
+         </form>
+         <form id="delete" class="form" method="post" action="admin.php">
+            <label for="display">Effacer une pâte</label><br>
+            <select name="pizza" id="pizza" size="0" form="order">
+            <?php foreach ($supp as $key => $value) 
+               {
+                   echo '<option value="' . $key . '">' . $key . '</option>';
+               }
+               ?>
+            <input type="submit" value="Effacer">
+         </form>
+         <form id="create" class="form" method="post" action="admin.php">
+            <label for="display">Créer une pâte</label><br>
+            <p>Nom de la pâte</p>
+            <input class="form-input" name="doughName" id="doughName" type="text" required>
+            <p>Prix de la pâte</p>
+            <input class="form-input" name="doughPrice" id="doughPrice" type="text" required><br>
+            Végétarien
+            <input class="checkBox" type="checkbox" id="doughVege" name="vegetarian" value="Végétarien">
+            Sans Gluten
+            <input class="checkBox" type="checkbox" id="doughGluten" name="gluten" value="Sans Gluten"><br>
+            <input type="submit" value="Créer">
+         </form>
+      </div>
+      <h1>Administration des tailles</h1>
+      <div class="form-container">
+         <form id="display" class="form" method="post" action="admin.php">
+            <label for="display">Afficher une taille</label><br>
+            <select name="pizza" id="pizza" size="0" form="order">
+            <?php foreach ($supp as $key => $value) 
+               {
+                   echo '<option value="' . $key . '">' . $key . '</option>';
+               }
+               ?>
+            <input type="submit" value="Afficher">
+         </form>
+         <form id="update" class="form" method="post" action="admin.php">
+            <label for="display">Modifier une taille</label><br>
+            <select name="pizza" id="pizza" size="0" form="order">
+            <?php foreach ($supp as $key => $value) 
+               {
+                   echo '<option value="' . $key . '">' . $key . '</option>';
+               }
+               ?>
+            <input type="submit" value="Modifier">
+         </form>
+         <form id="delete" class="form" method="post" action="admin.php">
+            <label for="display">Effacer une taille</label><br>
+            <select name="pizza" id="pizza" size="0" form="order">
+            <?php foreach ($supp as $key => $value) 
+               {
+                   echo '<option value="' . $key . '">' . $key . '</option>';
+               }
+               ?>
+            <input type="submit" value="Effacer">
+         </form>
+         <form id="create" class="form" method="post" action="admin.php">
+            <label for="display">Créer une taille</label><br>
+            <p>Nom de la taille</p>
+            <input class="form-input" name="ingredientName" id="ingredientName" type="text" required>
+            <p>Prix de la taille</p>
+            <input class="form-input" name="ingredientPrice" id="ingredientPrice" type="text" required><br>
             <input type="submit" value="Créer">
          </form>
       </div>

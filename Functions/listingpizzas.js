@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             'suppIds':getSelectedValues(fields['supps']),
             'quantity':fields['quantity'].value
         }
-        postRequest('http://localhost:8888/mainbranch/Controlers/orderline_test.php', function(httpRequest) {
+        postRequest('http://localhost/Projet%20PHP/test3/Controlers/orderline_test.php', function(httpRequest) {
             refreshBasket();
         }, post);
     });
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function updateForm(clickedPizza, fields) {
     let clickedPizzaId = clickedPizza.getAttribute('pizzaid');
 
-    request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson.php', function(httpRequest) {
+    request('http://localhost/Projet%20PHP/test3/Controlers/orderlinedatajson.php', function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         //Création des élements dom options des différents champs select en utilisant la réponse de la requête
         for (let pizza of response['pizzas']) {
@@ -120,7 +120,7 @@ function fillSupplements(suppSelect, selectedPizzaId) {
     while (suppSelect.options.length > 0)
         suppSelect.remove(suppSelect.lastChild);
     //Requete base de donnée pour connaitre les ingrédients disponible à la nouvelle pizza sélectionnée
-    request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson1.php?id='+selectedPizzaId, function(httpRequest) {
+    request('http://localhost/Projet%20PHP/test3/Controlers/orderlinedatajson1.php?id='+selectedPizzaId, function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         for (let ingredient of response) {
             let newOpt = document.createElement('option');
@@ -258,13 +258,13 @@ function refreshBasket() {
                                 }
                             }
                         }
-                        httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/cancelorderline.php?index='+i, true);
+                        httpRequest.open('GET', 'http://localhost/Projet%20PHP/test3/Controlers/cancelorderline.php?index='+i, true);
                         httpRequest.send();
                     })
                 }
             }
         }
     }
-    httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/panierjson.php', true);
+    httpRequest.open('GET', 'http://localhost/Projet%20PHP/test3/Controlers/panierjson.php', true);
     httpRequest.send();
 }

@@ -11,8 +11,15 @@
                     $_SESSION['loggedIn'] == TRUE &&
                     isset($_SESSION['userLoggedIn']) &&
                     ($user = readUserById($_SESSION['userLoggedIn']['id'])) != 'NULL'
+            
                 )
-                {
+                { 
+                    if($user[0]['isAdmin'] == "1")
+                    {
+                        ?>
+            <li><a href="../Controlers/admin.php">Administration</a></li>
+                        <?php
+                    }
             ?>
             <li><a href="../Controlers/user_account.php">Mon Compte</a></li>
             <li><a href="../Controlers/disconnect.php">Se déconnecter</a></li>
