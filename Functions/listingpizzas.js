@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    let pizzaContainers = document.querySelectorAll('.pizzaContainer');
+    setGridDynamic(pizzaContainers.length);
+    setHeightDynamic();
     refreshBasket();
     let window = document.querySelector('.formWindow');
     let filter = document.querySelector('.filter');
@@ -12,7 +15,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'totalPrice' : document.querySelector('#totalPrice'),
         'send' : document.querySelector('#sendOrderLine'),
     } 
-    let pizzaContainers = document.querySelectorAll('.pizzaContainer');
     fields['send'].addEventListener('click', function(){
         let post = {
             'pizzaId':fields['pizza'].value,
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             'suppIds':getSelectedValues(fields['supps']),
             'quantity':fields['quantity'].value
         }
-        postRequest('http://localhost/Projet%20PHP/test3/Controlers/orderline_test.php', function(httpRequest) {
+        postRequest('http://localhost:8888/mainbranch/Controlers/orderline_test.php', function(httpRequest) {
             refreshBasket();
         }, post);
     });
@@ -58,31 +60,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function updateForm(clickedPizza, fields) {
     let clickedPizzaId = clickedPizza.getAttribute('pizzaid');
 
-    request('http://localhost/Projet%20PHP/test3/Controlers/orderlinedatajson.php', function(httpRequest) {
+    request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson.php', function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         //Création des élements dom options des différents champs select en utilisant la réponse de la requête
-        for (let pizza of response['pizzas']) {
-            let newOpt = document.createElement('option');
-            newOpt.value = pizza['id'];
-            newOpt.innerHTML = pizza['name'] + ' (' + pizza['totalPrice'] + '€)';
-            fields['pizza'].appendChild(newOpt);
-        }
-        for (let option in fields['pizza'].options) {
-            if (fields['pizza'].options[option].value == clickedPizzaId) {
-                fields['pizza'].selectedIndex = option;
+        console.log(response);
+        if (response['pizzas'].length > 0) {
+            for (let pizza of response['pizzas']) {
+                let newOpt = document.createElement('option');
+                newOpt.value = pizza['id'];
+                newOpt.innerHTML = pizza['name'] + ' (' + pizza['totalPrice'] + '€)';
+                fields['pizza'].appendChild(newOpt);
+            }
+            for (let option in fields['pizza'].options) {
+                if (fields['pizza'].options[option].value == clickedPizzaId) {
+                    fields['pizza'].selectedIndex = option;
+                }
             }
         }
-        for (let dough of response['doughs']) {
-            let newOpt = document.createElement('option');
-            newOpt.value = dough['id'];
-            newOpt.innerHTML = dough['name'] + ' (+' + dough['price'] + '€)';
-            fields['dough'].appendChild(newOpt);
+        if (response['doughs'] != 'NULL') {
+            for (let dough of response['doughs']) {
+                let newOpt = document.createElement('option');
+                newOpt.value = dough['id'];
+                newOpt.innerHTML = dough['name'] + ' (+' + dough['price'] + '€)';
+                fields['dough'].appendChild(newOpt);
+            }
         }
-        for (let size of response['sizes']) {
-            let newOpt = document.createElement('option');
-            newOpt.value = size['id'];
-            newOpt.innerHTML = size['name'] + ' (+' + size['price'] + '€)';
-            fields['size'].appendChild(newOpt);
+        if (response['sizes'] != 'NULL') {
+            for (let size of response['sizes']) {
+                let newOpt = document.createElement('option');
+                newOpt.value = size['id'];
+                newOpt.innerHTML = size['name'] + ' (+' + size['price'] + '€)';
+                fields['size'].appendChild(newOpt);
+            }
         }
         fillSupplements(fields['supps'], fields['pizza'].options[fields['pizza'].selectedIndex].value);
         setPricesHTML(fields, response);
@@ -120,53 +129,60 @@ function fillSupplements(suppSelect, selectedPizzaId) {
     while (suppSelect.options.length > 0)
         suppSelect.remove(suppSelect.lastChild);
     //Requete base de donnée pour connaitre les ingrédients disponible à la nouvelle pizza sélectionnée
-    request('http://localhost/Projet%20PHP/test3/Controlers/orderlinedatajson1.php?id='+selectedPizzaId, function(httpRequest) {
+    request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson1.php?id='+selectedPizzaId, function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
-        for (let ingredient of response) {
-            let newOpt = document.createElement('option');
-            newOpt.value = ingredient['id'];
-            newOpt.innerHTML = ingredient['name'] + ' (+' + ingredient['price'] + '€)';
-            suppSelect.appendChild(newOpt);
+        if (response != 'NULL') {
+            for (let ingredient of response) {
+                let newOpt = document.createElement('option');
+                newOpt.value = ingredient['id'];
+                newOpt.innerHTML = ingredient['name'] + ' (+' + ingredient['price'] + '€)';
+                suppSelect.appendChild(newOpt);
+            }
         }
     });
 }
 
 function computePrice(fields, datas) {
-    let p, s, d;
-    let selectedPizzaId = fields['pizza'].options[fields['pizza'].selectedIndex].value;
-    let selectedSizeId = fields['size'].options[fields['size'].selectedIndex].value;
-    let selectedDoughId = fields['dough'].options[fields['dough'].selectedIndex].value;
+    let selectedPizzaOptions = fields['pizza'].options[fields['pizza'].selectedIndex];
+    let selectedSizeOption = fields['size'].options[fields['size'].selectedIndex];
+    let selectedDoughOption = fields['dough'].options[fields['dough'].selectedIndex];
+    let selectedPizzaId = (selectedPizzaOptions != undefined) ? selectedPizzaOptions.value : false;
+    let selectedSizeId = (selectedSizeOption != undefined) ? selectedSizeOption.value : false;
+    let selectedDoughId = (selectedDoughOption != undefined) ? selectedDoughOption.value : false;
     let selectedSuppIds = getSelectedValues(fields['supps']);
-
+    let pizzaTotalPrice = 0;
+    let sizePrice = 0;
+    let doughPrice = 0;
+    let suppsTotalPrice = 0;
+    if (datas)
     for (let pizza of datas['pizzas']) {
         if (pizza['id'] == selectedPizzaId) {
-            p = pizza;
+            pizzaTotalPrice = parseFloat(pizza['totalPrice']);
             break;
         }
     }
     for (let size of datas['sizes']) {
         if (size['id'] == selectedSizeId) {
-            s = size;
+            sizePrice = parseFloat(size['price']);
             break;
         }
     }
     for (let dough of datas['doughs']) {
         if (dough['id'] == selectedDoughId) {
-            d = dough;
+            doughPrice = parseFloat(dough['price']);
             break;
         }
     }
-    let sps = 0;
     if (Array.isArray(selectedSuppIds)) { 
         for (let selectedSuppId of selectedSuppIds) {
             for (ingredient of datas['ingredients']) {
                 if (ingredient['id'] == selectedSuppId) {
-                    sps += parseFloat(ingredient['price']);
+                    suppsTotalPrice += parseFloat(ingredient['price']);
                 }
             }
         }
     }
-    return parseFloat(p['totalPrice']) + parseFloat(s['price']) + parseFloat(d['price']) + sps;
+    return pizzaTotalPrice + sizePrice + doughPrice + suppsTotalPrice;
 }
 
 let request = function (url, onsuccess) {
@@ -220,6 +236,79 @@ function removeAllOptions(select) {
 }
 
 function refreshBasket() {
+    let parentContainer = document.getElementById("panierjson");
+    request('http://localhost:8888/mainbranch/Controlers/panierjson.php', function(httpRequest) {
+        let response = JSON.parse(httpRequest.responseText);
+        while (parentContainer.children.length > 0) {
+            parentContainer.removeChild(parentContainer.children[0])
+        }
+        for (let i in response) {
+            let orderline = response[i];
+            let container = document.createElement('div');
+            let quantity = document.createElement('span');
+            let pizzaName = document.createElement('span');
+            let sizeName = document.createElement('span');
+            let doughName = document.createElement('span');
+            let ingredientNames = document.createElement('ul');
+            container.setAttribute('class', 'orderlineContainer');
+            quantity.setAttribute('class', 'quantityValue textField');
+            quantity.innerHTML = orderline['quantity'];
+            pizzaName.setAttribute('class', 'pizzaName textField');
+            pizzaName.innerHTML = orderline['pizzaId']['name'];
+            sizeName.setAttribute('class', 'sizeName textField');
+            sizeName.innerHTML = orderline['sizeId']['name'];
+            doughName.setAttribute('class', 'doughName textField');
+            doughName.innerHTML = orderline['doughId']['name'];
+            ingredientNames.setAttribute('class', 'ingredientsNames');
+            for (let supp of orderline['suppIds']) {
+                let newOpt = document.createElement('li');
+                newOpt.setAttribute('class', 'ingredientName');
+                newOpt.innerHTML = supp['name'];
+                ingredientNames.appendChild(newOpt);
+            }
+            container.appendChild(quantity);
+            container.appendChild(pizzaName);
+            container.appendChild(sizeName);
+            container.appendChild(doughName);
+            container.appendChild(ingredientNames);
+            parentContainer.appendChild(container);
+            let btnCancelOrderline = document.createElement('button');
+            btnCancelOrderline.setAttribute('class', 'deletebtn'); //class pour styler le button delete
+            btnCancelOrderline.innerHTML = 'Annuler'
+            btnCancelOrderline.setAttribute('orderlineindex', i);
+            container.appendChild(btnCancelOrderline);
+
+            btnCancelOrderline.addEventListener("click", function (c) {
+                let httpRequest = new XMLHttpRequest();
+                httpRequest.onreadystatechange = function () {
+                    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                        const status = httpRequest.status;
+                        if (status === 0 || (status >= 200 && status < 400)) {
+                            refreshBasket();
+                        }
+                    }
+                }
+                httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/cancelorderline.php?index='+i, true);
+                httpRequest.send();
+            })
+        }
+    })
+}
+
+function setGridDynamic(pizzaCount) {
+    console.log('repeat(' + (Math.floor(pizzaCount / 3) || 1) + ', 200px)');
+    document.querySelector('#listingpizzas').style.gridTemplateRows = 'repeat(' + (Math.floor(pizzaCount / 3) || 1) + ', 200px)';
+}
+
+function setHeightDynamic() {
+    let c = document.querySelector('.container_menu');
+    let c_child = document.querySelector('#menu');
+    let c_child_height = window.getComputedStyle(c_child, null).height;
+    console.log(c_child_height)
+    c.style.height = c_child_height;
+}
+
+/*function refreshBasket() {
     let httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -258,13 +347,13 @@ function refreshBasket() {
                                 }
                             }
                         }
-                        httpRequest.open('GET', 'http://localhost/Projet%20PHP/test3/Controlers/cancelorderline.php?index='+i, true);
+                        httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/cancelorderline.php?index='+i, true);
                         httpRequest.send();
                     })
                 }
             }
         }
     }
-    httpRequest.open('GET', 'http://localhost/Projet%20PHP/test3/Controlers/panierjson.php', true);
+    httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/panierjson.php', true);
     httpRequest.send();
-}
+}*/

@@ -23,4 +23,8 @@
             }
         }
         echo json_encode($json_arr);
+    } else 
+    {
+        echo json_encode(array());
     }
+   

@@ -2,7 +2,7 @@
 include_once('connection.php');
 function insertUser($firstname, $name, $email, $pass, $address, $cityId){
     
-    $query = "INSERT INTO User (firstname, name, email, pass, address, cityId) VALUES(:firstname, :name, :email, :pass, :address, :cityId)";
+    $query = "INSERT INTO User (firstname, name, email, pass, address, cityId, isAdmin) VALUES(:firstname, :name, :email, :pass, :address, :cityId, 0)";
         $query_params = array(
             ':firstname'=>$firstname,
             ':name'=>$name,

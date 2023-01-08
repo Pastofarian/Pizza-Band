@@ -1,8 +1,43 @@
 #panier {
     flex:1;
-    color:black;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
 }
-
-#panierjson{
-    /*height: 100%;*/
+#panierjson
+{
+    width:95%;
+    margin:auto;
+    height:100%;
+    background-color: rgba(255,255,255,0.8);
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    padding:5px;
+}
+#panierjson .orderlineContainer
+{
+    box-shadow: 0 0 3px black;
+    background-color: white;
+}
+#panierjson .textField
+{
+    display: block;
+}
+#panierjson .quantityValue, #panierjson .pizzaName
+{
+    display: inline-block;
+}
+/*#panierjson .quantityValue, #panierjson .pizzaName
+{
+    display: inline;
+}*/
+#panierjson ul
+{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
 }

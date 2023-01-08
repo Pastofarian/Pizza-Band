@@ -12,16 +12,25 @@
     color: black;
     font-weight: bold;
     font-size: 25px;
-    overflow-y: scroll;
+    overflow: scroll;
     font-family: 'Quicksand', sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+#listingpizzas::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none; 
 }
 
 #listingpizzas .pizzaContainer {
     box-shadow: 0 0 3px black;
     cursor: pointer;
     /*overflow: scroll;*/
+    background-color: white;
     -ms-overflow-style: none;
-    scrollbar-width: none; 
+    scrollbar-width: none;
+    height: 200px;
 }
 
 #listingpizzas .pizzaContainer::-webkit-scrollbar {
