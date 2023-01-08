@@ -16,6 +16,7 @@
       <link rel="stylesheet" href="../CSS/nav.css" />
       <link rel="stylesheet" href="../CSS/footer.css" />
       <link rel="stylesheet" href="../CSS/backgroundFilter.css">
+      <script type="text/javascript" src="../Scripts/pizza_admin.js"></script>
       <title>AdminView</title>
    </head>
    <body class="homePage">
@@ -23,6 +24,14 @@
       <?php
          include './nav.php';
       ?>
+      <div class="mainWrapper">
+         <?php
+            include './pizza_admin.php';
+            include './ingre_admin.php';
+            include './size_admin.php';
+            include './dough_admin.php';
+         ?>
+      </div>
       <?php
          include './footer.php';
       ?>

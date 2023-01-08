@@ -63,6 +63,12 @@
     padding-right:0.5em;
     max-height: 100px;
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+#listingpizzas .pizzaContainer .ingredientList::-webkit-scrollbar{
+    display: none;
 }
 
 #listingpizzas .pizzaContainer .ingredientList li{

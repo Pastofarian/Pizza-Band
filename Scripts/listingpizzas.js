@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             'suppIds':getSelectedValues(fields['supps']),
             'quantity':fields['quantity'].value
         }
-        postRequest('http://localhost:8888/mainbranch/Controlers/orderline_test.php', function(httpRequest) {
+        postRequest('http://localhost/Projet%20PHP/test3/Controlers/orderline_test.php', function(httpRequest) {
             refreshBasket();
         }, post);
     });
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function updateForm(clickedPizza, fields) {
     let clickedPizzaId = clickedPizza.getAttribute('pizzaid');
 
-    request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson.php', function(httpRequest) {
+    request('http://localhost/Projet%20PHP/test3/Controlers/orderlinedatajson.php', function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         //Création des élements dom options des différents champs select en utilisant la réponse de la requête
         console.log(response);
@@ -129,7 +129,7 @@ function fillSupplements(suppSelect, selectedPizzaId) {
     while (suppSelect.options.length > 0)
         suppSelect.remove(suppSelect.lastChild);
     //Requete base de donnée pour connaitre les ingrédients disponible à la nouvelle pizza sélectionnée
-    request('http://localhost:8888/mainbranch/Controlers/orderlinedatajson1.php?id='+selectedPizzaId, function(httpRequest) {
+    request('http://localhost/Projet%20PHP/test3/Controlers/orderlinedatajson1.php?id='+selectedPizzaId, function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         if (response != 'NULL') {
             for (let ingredient of response) {
@@ -228,7 +228,7 @@ function getSelectedValues(select) {
       }
     }
     return result;
-  }
+}
 
 function removeAllOptions(select) {
     while (select.options.length > 0)
@@ -237,7 +237,7 @@ function removeAllOptions(select) {
 
 function refreshBasket() {
     let parentContainer = document.getElementById("panierjson");
-    request('http://localhost:8888/mainbranch/Controlers/panierjson.php', function(httpRequest) {
+    request('http://localhost/Projet%20PHP/test3/Controlers/panierjson.php', function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         while (parentContainer.children.length > 0) {
             parentContainer.removeChild(parentContainer.children[0])
@@ -288,7 +288,7 @@ function refreshBasket() {
                         }
                     }
                 }
-                httpRequest.open('GET', 'http://localhost:8888/mainbranch/Controlers/cancelorderline.php?index='+i, true);
+                httpRequest.open('GET', 'http://localhost/Projet%20PHP/test3/Controlers/cancelorderline.php?index='+i, true);
                 httpRequest.send();
             })
         }

@@ -16,3 +16,11 @@ body {
     min-height:150vh;
     position:relative;
 }
+
+.mainWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid white;
+
+}
