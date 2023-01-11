@@ -44,6 +44,9 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
             <h2>Commande</h2>
             <div id="panierjson">
             </div>
+            <form method="GET" action="../Controlers/pushorder.php">
+               <input type="submit" value="Passer commande">
+            </form>
          </div>
       </div>
       <?php 

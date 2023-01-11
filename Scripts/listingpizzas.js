@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             'doughId':fields['dough'].value,
             'sizeId':fields['size'].value,
             'suppIds':getSelectedValues(fields['supps']),
-            'quantity':fields['quantity'].value
+            'quantity':fields['quantity'].value,
+            'price':fields['totalPrice'].value
         }
         postRequest('http://localhost/Projet%20PHP/test3/Controlers/orderline_test.php', function(httpRequest) {
             refreshBasket();
