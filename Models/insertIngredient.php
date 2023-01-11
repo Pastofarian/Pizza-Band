@@ -16,7 +16,5 @@ function insertIngredient($name, $price, $isVege, $isGluFree){
         die("Failed query : " . $ex->getMessage());
     }
 }
-insertIngredient("Lard", 2, 0, 1);
 
-//insertDB("Doe", "John", "2022-08-05", "john.doe@outlook.com", "pass");
-?>
+

@@ -16,7 +16,7 @@
       <link rel="stylesheet" href="../CSS/nav.css" />
       <link rel="stylesheet" href="../CSS/footer.css" />
       <link rel="stylesheet" href="../CSS/backgroundFilter.css">
-      <script type="text/javascript" src="../Scripts/pizza_admin.js"></script>
+      <script type="text/javascript" src="../Scripts/admin.js"></script>
       <title>AdminView</title>
    </head>
    <body class="homePage">

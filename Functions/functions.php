@@ -6,20 +6,6 @@ include '../Models/readIngredients.php';
 
 
 
-
-
-function deleteOrderLine($index)
-{
-    unset($_SESSION["order"][$index]);
-}
-
-
-function addOrderLine($values)
-{
-    array_push($_SESSION["order"], $values);
-}
-
-
 //check la validité de l'email
 function checkEmail($email) {
     $error = "";

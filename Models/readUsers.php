@@ -16,8 +16,5 @@ function readUsers(){
   return (!empty($result)) ? $result: 'NULL';
 }
 
-// $result = readUsers();
-// var_dump($result);
-// echo("test");
-// var_dump(recupAllInfoAdmin());
+
  ?>

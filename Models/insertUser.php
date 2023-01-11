@@ -20,6 +20,3 @@ function insertUser($firstname, $name, $email, $pass, $address, $cityId){
         }
 }
 
-
-//insertUser("John", "Doe", 'John@outlook.com', 'test45', 'Rue du poulet 666', 2);
-?>
