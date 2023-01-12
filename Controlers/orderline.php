@@ -6,21 +6,30 @@
     include_once('../Models/readPizzaById.php');
     include_once('../Models/readPizzas.php');
     include_once('../Models/readIngredients.php');
+    include_once('../Models/readIngredientsByPizzaId.php');
+    include_once('../Models/readPizzaTotalPriceById.php');
 
-    $_SESSION["pizzasList"] = readPizzas();
+    $pizzas = readPizzas();
+    if ($pizzas == 'NULL')
+        $pizzas = array();
+    for ($i = 0; $i < count($pizzas); $i++) {
+        $pizzas[$i]['ingredients'] = readIngredientsByPizzaId($pizzas[$i]['id']);
+        $pizzas[$i]['totalPrice'] = readPizzaTotalPriceById($pizzas[$i]['id'])[0]['price'];
+    }
+    $_SESSION["pizzasList"] = $pizzas;
     $_SESSION["suppList"] = readIngredients();
 
     $currentOrder = [];
-    $url = '';
 
     if(!isset($_SESSION["order"]))
     {
           $_SESSION["order"] = [];
     }
 
-    var_dump($_POST);
+    //partie déplacée vers un controleur appelé par le javascript 
+    //var_dump($_POST);
 
-    if(isset($_POST))
+    /*if(isset($_POST))
     {
         if(isset($_POST['pizza']) && checkPizza($_POST['pizza']) &&
             isset($_POST['qty']) && checkQty($_POST['qty']) &&
@@ -33,7 +42,7 @@
             }
             array_push($_SESSION['order'], $currentOrder);
         }
-    }
+    }*/
 
     header('Location: ../Views/menu_pizzas.php');
 
@@ -65,4 +74,4 @@
         return true;
     }
 
-?>
+

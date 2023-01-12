@@ -1,32 +1,55 @@
-﻿/* li {
-    color: blue;
-} */
+﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;700&family=Roboto&display=swap');
 
 body {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-        url("../Images/menu_background.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+
+    background-image: url('../Images/main_background.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    font-family: Arial;
-    margin: 0px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    color: black;
+    min-width: 600px;
+    min-height: 150vh;
+    position: relative;
+}
+
+select {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.container_menu {
+    margin: auto;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
+    position: relative;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.container_menu::-webkit-scrollbar {
+    display: none;
+}
+
+.container_menu>#menu {
+    flex: 3;
+    overflow: hidden;
+}
+
+.container_menu h2 {
+    font-weight: 300;
+    font-size: 2em;
+    text-align: center;
     color: white;
+    border-bottom: 1px solid white;
 }
 
 body.homePage {
     background-image: url("../Images/main_background.jpg");
-}
-
-a.homePage {
-    color: red;
-    font-size: 18px;
-    display: block;
-    margin-top: 30px;
-    text-align: center;
 }
 
 .centered {
@@ -34,20 +57,6 @@ a.homePage {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-#small_logo {
-    margin-left: 35px;
-    margin-top: 25px;
-
-}
-
-h1 {
-    color: white;
-    background-color: #DD7835;
-    display: inline;
-    padding: 8px 22px;
-    font-size: 45px;
 }
 
 .menu_title {
@@ -92,132 +101,91 @@ h1 {
     margin-top: 6px;
 }
 
-/* login/newAccount */
-
-.container {
-    background-color: black;
-    border-top: none;
-    height: 30px;
-    min-height: 30px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    margin-bottom: -1px;
-}
-
-#newAccount {
-    color: #DD7835;
-    font-family: 'Poppins', sans-serif;
-    font-size: medium;
-    font-weight: 600;
-    position: absolute;
-    right: 11.5em;
-    top: 0.3em;
-}
-
-#login {
-    color: #DD7835;
-    font-family: 'Poppins', sans-serif;
-    font-size: medium;
-    font-weight: 600;
-    position: absolute;
-    right: 3em;
-    top: 0.3em;
-}
-
-/* new_account */
-
-.container_parent {
-    height: 1000px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    text-align: center;
-}
-
-.container_child {
-    color: black;
-    font-family: 'Poppins', sans-serif;
-    font-size: medium;
-    font-weight: bold;
-    width: 650px;
-    position: relative;
-    top: 5%;
-    margin: 30px;
-    padding: 80px;
-    background-color: #ffffff;
-    border: 1px solid black;
-    line-height: 2.5em;
-    opacity: 0.9;
-    border-radius: 2%;
-    display: inline-block
-}
-
-.input_form {
-    text-align: left;
-}
-
-#submit {
-    background-color: #DD7835;
-    border: none;
-    text-decoration: none;
-    color: white;
-    padding: 20px 20px;
-    margin: 20px 20px;
-    cursor: pointer;
-}
-
-/*******menu list*************/
-
-form {
-    width: 400px;
-    padding: 15% 10%;
-    margin: 0 auto;
-    text-align: center;
-}
-
-label {
-    background-color: rgb(221, 120, 53, 0.5);
-    border-radius: 10px;
-    padding: 2% 0%;
-    display: block;
-    margin-bottom: 0.5em;
-    font-weight: bold;
-    font-size: 25px;
-}
-
-input[type="number"] {
-    margin-bottom: 20px;
-    margin-top: -15px;
-    background-color: rgba(255, 255, 255, 0.13);
-    color: #D8D8D8;
-    border: none;
-    border-radius: 10px;
-    border: 3px solid #D8D8D8;
-    width: 70px;
-    text-align: center;
-    font-size: 20px;
-    outline: none;
-    padding: 8px;
-}
-
-input[type="number"]:hover {
-    border-color: #DD7835;
-}
-
-input[type="number"]:focus {
-    border-color: #000000;
-}
-
-select {
-    color: #D8D8D8;
+.filter {
+    top: 0px;
+    left: 0px;
     width: 100%;
-    height: 2.5em;
-    margin-bottom: 1em;
-    border: 1px solid #DD7835;
-    border-radius: 10px;
-    appearance: none;
-    background-color: rgba(255, 255, 255, 0.13);
-    font-size: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    position: fixed;
+    background-color:
+        rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+#sendOrderLine {
+    display: inline-block;
+    width: 100%;
+}
+
+.formWindow {
+    width: 50%;
+    margin: auto;
+    background-color: white;
+    height: 80%;
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+    z-index: 3;
+    padding: 1em;
+    font-size: 1em;
+    background-color: white;
+}
+
+.formWindow button {
+    border-radius: 0;
+    border: 1px solid black;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1em;
+}
+
+.formWindow select,
+.formWindow input {
+    border: 0;
+    color: black;
+    border-radius: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1em;
+    font-weight: 300;
+    text-align: center;
+}
+
+.formWindow select:focus,
+.formWindow input:focus {
+    border: 0;
+    outline: 0;
+}
+
+.formWindow .fieldContainer .subContainer {
+    display: flex;
+}
+
+.formWindow .fieldContainer .subContainer * {
+    flex: 1;
+    text-align: center;
+}
+
+.formWindow .fieldContainer {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid black;
+}
+
+.formWindow .fieldContainer .fieldLabel {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.formWindow .fieldContainer .fieldData {
+    flex: 2;
+}
+
+.formWindow .fieldContainer .inlineField {
+    display: inline-block;
+    width: 2em;
 }
 
 input[type="submit"] {
@@ -233,16 +201,14 @@ input[type="submit"] {
 }
 
 .deletebtn {
-    width: 270px;
-    display: inline-block;
-    margin-top: 1em;
-    border: 1px solid #DD7835;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
+    width: 100%;
+    font-family: 'Quicksand', sans-serif;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
     text-decoration: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1em;
 }
 
 .deletebtn:hover {
@@ -253,70 +219,10 @@ input[type="submit"] {
     height: 95px;
 }
 
-.container_menu {
-    display: flex;
-    align-items: center;
-}
-
 .displayFlex {
     flex-direction: row;
     justify-content: space-between;
     flex: 1;
-}
-
-/*****Panier *****/
-
-#basket {
-    color: #DD7835;
-}
-
-form#sendorder {
-    background-color: black;
-    border: 1px solid #DD7835;
-    border-radius: 10px;
-    opacity: 0.9;
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
-}
-
-form#sendorder label {
-    font-weight: bold;
-    font-size: 25px;
-    display: block;
-    margin-bottom: 0.5em;
-}
-
-form#sendorder input[type="number"] {
-    width: 80px;
-    height: 40px;
-    border: 1px solid #DD7835;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-form#sendorder input[type="submit"] {
-    width: 320px;
-    height: 40px;
-    background-color: #DD7835;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#panierjson {
-    margin-right: 300px;
-    padding: 50px;
-    width: 40%;
-    background-color: black;
-    border: 1px solid #DD7835;
-    border-radius: 10px;
-    opacity: 0.9;
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
 }
 
 #orderConfirmation {
@@ -330,31 +236,3 @@ form#sendorder input[type="submit"] {
     border-radius: 6px;
     transition: all 0.3s ease;
 }
-
-
-
-/* #panierjson label {
-    font-weight: bold;
-    font-size: 25px;
-    display: block;
-    margin-bottom: 0.5em;
-  }
-  
-  #panierjson input[type="number"] {
-    width: 80px;
-    height: 40px;
-    border: 1px solid #DD7835;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  
-  #panierjson input[type="submit"] {
-    width: 320px;
-    height: 40px;
-    background-color: #DD7835;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  } */

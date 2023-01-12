@@ -1,7 +1,7 @@
 <?php
 include_once 'connection.php';
-function deleteIngredient($id){
-    $query = "DELETE FROM `Ingredient` WHERE id = :id";
+function readUserById($id){
+    $query = "SELECT * FROM `User` WHERE id = :id";
     $query_params = array(
         ':id'=>$id
     );
@@ -12,5 +12,7 @@ function deleteIngredient($id){
     catch(PDOException $ex){
         die("Failed query : " . $ex->getMessage());
     }
+    $result = $stmt->fetchall();
+    return (!empty($result)) ? $result: 'NULL';
 }
-//deleteIngredient(10);
+

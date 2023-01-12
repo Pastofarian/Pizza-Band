@@ -1,10 +1,8 @@
 <?php
 include_once 'connection.php';
-function deleteIngredient($id){
-    $query = "DELETE FROM `Ingredient` WHERE id = :id";
-    $query_params = array(
-        ':id'=>$id
-    );
+function readDoughs(){
+    $query = "SELECT * FROM `Dough`";
+    $query_params = array();
     try {
         $stmt = getPDO()->prepare($query);
         $result = $stmt->execute($query_params);
@@ -12,5 +10,6 @@ function deleteIngredient($id){
     catch(PDOException $ex){
         die("Failed query : " . $ex->getMessage());
     }
+    $result = $stmt->fetchall();
+    return (!empty($result)) ? $result: 'NULL';
 }
-//deleteIngredient(10);

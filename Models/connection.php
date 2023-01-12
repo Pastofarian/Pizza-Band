@@ -1,7 +1,5 @@
 <?php
     function getPDO() {
-        // if (isset($_SESSION) && isset($_SESSION["PDO"]))
-        //     return $_SESSION["PDO"];
         $db;
         $username = "root";
         $password = "toto";

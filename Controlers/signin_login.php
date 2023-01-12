@@ -1,11 +1,13 @@
 <?php
 
 include("../Models/readUserByEmail.php");
+include("../Models/readCities.php");
 include("../Functions/functions.php");
 
 session_start();
 
-$url; 
+$url;
+$_SESSION["citylist"] = readCities();
 $_SESSION["error"] = "";
 
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])
@@ -40,7 +42,7 @@ if(isset($_POST) && !empty($_POST))
             //si les flags sont ok -> pizza_menu
             if($isPassAndLogOk)
             {
-                $_SESSION["loggedIn"] = TRUE; //permets l'accès. Evite accès direct par url
+                $_SESSION["loggedIn"] = TRUE;
                 $_SESSION["userLoggedIn"] = $user[0];
                 $url = "Location: ../Controlers/orderline.php";
             } 
@@ -63,7 +65,6 @@ if(isset($_POST) && !empty($_POST))
 }
 else 
 {
-    echo "test3";
     $url = "Location: ../Views/signin_login.php";
 }
 

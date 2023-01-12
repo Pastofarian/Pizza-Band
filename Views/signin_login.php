@@ -1,15 +1,17 @@
 <?php
-   session_start();
-   
-   if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
-   {
-      header("Location: ../Controlers/orderline.php");
-   }
-   
-   
-   
-   
-   ?>
+
+session_start();
+
+$relativePath;
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)
+   $relativePath = '../Controlers/orderline.php';
+if(!isset($_SESSION['citylist']))
+   $relativePath = '../Controlers/signin_login.php';
+if (isset($relativePath))
+   header('Location: '.$relativePath);
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
    <head>
@@ -18,7 +20,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Inscription/Connexion</title>
       <link rel="stylesheet" type="text/css" href="../CSS/signin_login.css">
-      <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
       <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
    </head>
    <body>
@@ -79,13 +80,11 @@
                            echo'<pre>';
                            echo $_SESSION["checkEmail"];
                            echo'<pre>';
-                           echo $_SESSION["checkDob"];
-                           echo'<pre>';
                            echo $_SESSION["matchPassword"];
                            echo'<pre>';
                            echo $_SESSION["checkDuplicates"];
                         }
-                        
+
                         ?>
                   </div>
                   <fieldset>
@@ -111,11 +110,11 @@
                         <select name="cityId" id="cityId">
                            <?php
                               foreach($_SESSION["citylist"] as $key => $value){
-                              ?>
+                           ?>
                            <option value="<?=$value["id"]?>"><?=$value["name"]?></option>
                            <?php
                               }
-                              ?>
+                           ?>
                         </select>
                      </div>
                      <div class="input-block">
@@ -149,5 +148,5 @@
        
 </script>
 <?php 
-   include('footer.php')
-   ?>
+include('footer.php')
+?>
