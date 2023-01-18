@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;700&family=Roboto&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Roboto&display=swap');
 
 body {
 
@@ -45,7 +45,7 @@ select {
     font-size: 2em;
     text-align: center;
     color: white;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #DD7835;
 }
 
 body.homePage {
@@ -123,7 +123,7 @@ body.homePage {
 .formWindow {
     width: 50%;
     margin: auto;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
     height: 80%;
     display: none;
     flex-direction: column;
@@ -131,7 +131,6 @@ body.homePage {
     z-index: 3;
     padding: 1em;
     font-size: 1em;
-    background-color: white;
 }
 
 .formWindow button {
@@ -165,6 +164,7 @@ body.homePage {
 .formWindow .fieldContainer .subContainer * {
     flex: 1;
     text-align: center;
+    background-color: white;
 }
 
 .formWindow .fieldContainer {
@@ -177,6 +177,7 @@ body.homePage {
     flex: 1;
     text-align: center;
     border-right: 1px solid black;
+    background-color: white;
 }
 
 .formWindow .fieldContainer .fieldData {
@@ -198,21 +199,6 @@ input[type="submit"] {
     color: #fff;
     cursor: pointer;
     font-size: 20px;
-}
-
-.deletebtn {
-    width: 100%;
-    font-family: 'Quicksand', sans-serif;
-    border: 1px solid black;
-    background-color: white;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-.deletebtn:hover {
-    background-color: rgba(255, 255, 255, 0.07);
 }
 
 #supp {
