@@ -2,10 +2,12 @@ footer {
     text-align: center;
     color: white;
     background-color: rgba(0, 0, 0, 0.800);
-    margin-top: 3em;
+    margin-top: auto;
     font-size: 0.7em;
-    position: absolute;
+    position:absolute;
+    height:180px;
     width: 100%;
+    align-self: flex-end;
     bottom:0;
     left:0;
 }

@@ -11,10 +11,6 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
    header("Location: ../Controlers/orderline.php");
 }
 
-if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
-{
-   header("Location: ../Controlers/orderline.php");
-}
 ?>
 
 <!DOCTYPE html>
@@ -39,25 +35,7 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       <?php
          include('nav.php');
       ?>
-      <header></header>
-      <?php
-         include('nav.php');
-      ?>
       <div class="container_menu">
-         
-         <div id="menu">
-            <h2>Nos Pizzas</h2>
-            <?php 
-               include('kanban.php');    
-            ?>
-         </div>
-         <div id="panier">
-            <h2>Commande</h2>
-            <div id="panierjson">
-            </div>
-            <form method="GET" action="../Controlers/pushorder.php">
-               <input type="submit" value="Passer commande">
-            </form>
          <div id="menu">
             <h2>Nos Pizzas</h2>
             <?php 
@@ -73,11 +51,6 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
             </form>
          </div>
       </div>
-      <?php 
-         include('footer.php');
-         include('orderLineForm.php');
-      ?>
-      <div id="backgroundFilter">
       <?php 
          include('footer.php');
          include('orderLineForm.php');

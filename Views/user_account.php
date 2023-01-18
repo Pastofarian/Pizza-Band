@@ -1,7 +1,7 @@
 <?php
    session_start();
    include_once('../Models/readUserById.php');
-   include_once('header.php');
+   //include_once('header.php');
 
    if (!isset($_SESSION['user']) || !isset($_SESSION['city']))
       header('Location: ../Controlers/user_account.php');
@@ -16,8 +16,8 @@
       <link rel="stylesheet" href="../CSS/user_account.css">
       <link rel="stylesheet" href="../CSS/footer.css">
       <link rel="stylesheet" href="../CSS/nav.css">
-
-      <script type="text/javascript" src="../Functions/panierjsonscript.js"></script>
+      <link rel="stylesheet" href="../CSS/header.css">
+      <!--<script type="text/javascript" src="../Functions/panierjsonscript.js"></script>-->
       <title>Compte utilisateur</title>
    </head>
    <body>
@@ -25,7 +25,6 @@
       <?php
          include('nav.php');
       ?>
-      <a href="menu_pizzas.php"><img src="../Images/small_logo.png" id="small_logo"></a>
       <div class="container_menu">
          <div class="displayFlex">
             <div class="user-profile">
@@ -54,13 +53,9 @@
                      <span class="info-title">Ville</span>
                      <?= $_SESSION['city'][0]['name'] ?>
                   </li>
-   
                </ul>
             </div>
          </div>
-         <?php
-         include 'panier.php';
-         ?>
       </div>
       <?php 
          include('footer.php')

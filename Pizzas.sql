@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Jan 07, 2023 at 04:05 PM
--- Server version: 5.7.34
--- PHP Version: 7.4.21
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mer. 18 jan. 2023 à 21:20
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,47 +18,51 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Pizzas`
+-- Base de données : `pizzas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `City`
+-- Structure de la table `city`
 --
 
-CREATE TABLE `City` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `cp` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cp` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `City`
+-- Déchargement des données de la table `city`
 --
 
-INSERT INTO `City` (`id`, `name`, `cp`) VALUES
+INSERT INTO `city` (`id`, `name`, `cp`) VALUES
 (1, 'Ottignies', '1340');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Dough`
+-- Structure de la table `dough`
 --
 
-CREATE TABLE `Dough` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `dough`;
+CREATE TABLE IF NOT EXISTS `dough` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `price` float NOT NULL,
-  `isVege` tinyint(4) NOT NULL,
-  `isGlutenFree` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `isVege` tinyint NOT NULL,
+  `isGlutenFree` tinyint NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `Dough`
+-- Déchargement des données de la table `dough`
 --
 
-INSERT INTO `Dough` (`id`, `name`, `price`, `isVege`, `isGlutenFree`) VALUES
+INSERT INTO `dough` (`id`, `name`, `price`, `isVege`, `isGlutenFree`) VALUES
 (1, 'Sarrasin', 2, 1, 0),
 (2, 'Classique', 2, 1, 0),
 (3, 'Poix chiche', 4, 1, 1);
@@ -66,23 +70,24 @@ INSERT INTO `Dough` (`id`, `name`, `price`, `isVege`, `isGlutenFree`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Ingredient`
+-- Structure de la table `ingredient`
 --
 
-CREATE TABLE `Ingredient` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `ingredient`;
+CREATE TABLE IF NOT EXISTS `ingredient` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `price` float NOT NULL,
-  `isVege` tinyint(4) NOT NULL,
-  `isGlutenFree` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `isVege` tinyint NOT NULL,
+  `isGlutenFree` tinyint NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `Ingredient`
+-- Déchargement des données de la table `ingredient`
 --
 
-INSERT INTO `Ingredient` (`id`, `name`, `price`, `isVege`, `isGlutenFree`) VALUES
-(1, 'Emmental', 0.5, 1, 1),
+INSERT INTO `ingredient` (`id`, `name`, `price`, `isVege`, `isGlutenFree`) VALUES
 (2, 'Base tomatée', 0.5, 1, 1),
 (3, 'Origan', 0, 1, 1),
 (4, 'Mozzarella', 0.5, 1, 1),
@@ -90,392 +95,271 @@ INSERT INTO `Ingredient` (`id`, `name`, `price`, `isVege`, `isGlutenFree`) VALUE
 (6, 'Gorgonzola', 1.5, 1, 1),
 (7, 'Fontina', 1, 1, 1),
 (8, 'Provolone', 1, 1, 1),
-(9, 'Câpre', 0.5, 1, 1),
-(10, 'Oeuf', 1, 1, 1),
 (11, 'Champignons', 1, 1, 1),
-(12, 'Salami piquant', 1, 0, 1),
-(13, 'Jambon de Parme', 1.5, 0, 1);
+(13, 'Jambon de Parme', 2.5, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Order`
+-- Structure de la table `order`
 --
 
-CREATE TABLE `Order` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
-  `stateId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `stateId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Order_State` (`stateId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `order`
+--
+
+INSERT INTO `order` (`id`, `date`, `stateId`) VALUES
+(3, '2023-01-18', 1),
+(4, '2023-01-18', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `OrderLine`
+-- Structure de la table `orderline`
 --
 
-CREATE TABLE `OrderLine` (
-  `id` int(11) NOT NULL,
-  `orderId` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `pizzaId` int(11) NOT NULL,
-  `sizeId` int(11) NOT NULL,
-  `doughId` int(11) NOT NULL,
-  `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `orderline`;
+CREATE TABLE IF NOT EXISTS `orderline` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `orderId` int NOT NULL,
+  `quantity` int NOT NULL,
+  `pizzaId` int NOT NULL,
+  `sizeId` int NOT NULL,
+  `doughId` int NOT NULL,
+  `price` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_OrderLine_Order` (`orderId`),
+  KEY `fk_OrderLine_Pizza` (`pizzaId`),
+  KEY `fk_OrderLine_Dough` (`doughId`),
+  KEY `fk_OrderLine_Size` (`sizeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `orderline`
+--
+
+INSERT INTO `orderline` (`id`, `orderId`, `quantity`, `pizzaId`, `sizeId`, `doughId`, `price`) VALUES
+(1, 3, 1, 25, 1, 1, 13.5),
+(2, 4, 1, 31, 1, 1, 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Pizza`
+-- Structure de la table `pizza`
 --
 
-CREATE TABLE `Pizza` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `pizza`;
+CREATE TABLE IF NOT EXISTS `pizza` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `price` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `Pizza`
+-- Déchargement des données de la table `pizza`
 --
 
-INSERT INTO `Pizza` (`id`, `name`, `price`) VALUES
-(1, 'Margarita', 4),
-(2, 'Proscuitto', 4),
-(3, '4 Fromages', 4),
-(4, 'Capricciosa', 4),
-(5, 'Diavola', 4);
+INSERT INTO `pizza` (`id`, `name`, `price`) VALUES
+(24, 'Margarita', 4),
+(25, 'Proscuitto', 4),
+(31, 'Funghi', 4),
+(32, 'Maison', 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Pizza_Ingredient`
+-- Structure de la table `pizza_ingredient`
 --
 
-CREATE TABLE `Pizza_Ingredient` (
-  `id` int(11) NOT NULL,
-  `ingredientId` int(11) NOT NULL,
-  `pizzaId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `pizza_ingredient`;
+CREATE TABLE IF NOT EXISTS `pizza_ingredient` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ingredientId` int NOT NULL,
+  `pizzaId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Unicity_Pizza_Ingredient` (`ingredientId`,`pizzaId`),
+  KEY `fk_Pizza_Ingredient_Pizza` (`pizzaId`)
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `Pizza_Ingredient`
+-- Déchargement des données de la table `pizza_ingredient`
 --
 
-INSERT INTO `Pizza_Ingredient` (`id`, `ingredientId`, `pizzaId`) VALUES
-(1, 1, 1),
-(4, 1, 2),
-(21, 1, 5),
-(2, 2, 1),
-(5, 2, 2),
-(8, 2, 3),
-(15, 2, 4),
-(22, 2, 5),
-(3, 3, 1),
-(6, 3, 2),
-(14, 3, 3),
-(9, 4, 3),
-(16, 4, 4),
-(7, 5, 2),
-(17, 5, 4),
-(11, 6, 3),
-(10, 7, 3),
-(13, 8, 3),
-(19, 9, 4),
-(18, 10, 4),
-(20, 11, 4),
-(23, 12, 5);
+INSERT INTO `pizza_ingredient` (`id`, `ingredientId`, `pizzaId`) VALUES
+(79, 2, 24),
+(87, 2, 25),
+(131, 2, 31),
+(134, 2, 32),
+(80, 3, 24),
+(89, 3, 25),
+(132, 3, 31),
+(135, 3, 32),
+(81, 4, 24),
+(88, 4, 25),
+(133, 4, 31),
+(91, 5, 25),
+(137, 6, 32),
+(130, 8, 25),
+(138, 11, 31),
+(136, 13, 32);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Size`
+-- Structure de la table `size`
 --
 
-CREATE TABLE `Size` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `size`;
+CREATE TABLE IF NOT EXISTS `size` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `price` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `Size`
+-- Déchargement des données de la table `size`
 --
 
-INSERT INTO `Size` (`id`, `name`, `price`) VALUES
+INSERT INTO `size` (`id`, `name`, `price`) VALUES
 (1, 'Small', 3),
 (2, 'Medium', 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `State`
+-- Structure de la table `state`
 --
 
-CREATE TABLE `State` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `state`;
+CREATE TABLE IF NOT EXISTS `state` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `state`
+--
+
+INSERT INTO `state` (`id`, `name`) VALUES
+(1, 'ready');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Supplement`
+-- Structure de la table `supplement`
 --
 
-CREATE TABLE `Supplement` (
-  `id` int(11) NOT NULL,
-  `ingredientId` int(11) NOT NULL,
-  `orderLineId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `supplement`;
+CREATE TABLE IF NOT EXISTS `supplement` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ingredientId` int NOT NULL,
+  `orderLineId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Unicity_Supplement` (`ingredientId`,`orderLineId`),
+  KEY `fk_Supplement_OrderLine` (`orderLineId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `User` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `pass` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `cityId` int(11) NOT NULL,
-  `isAdmin` TINYINT NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cityId` int NOT NULL,
+  `isAdmin` tinyint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Unicity_Email` (`email`),
+  KEY `fk_User_City` (`cityId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `User`
+-- Déchargement des données de la table `user`
 --
 
-INSERT INTO `User` (`id`, `firstname`, `name`, `email`, `pass`, `address`, `cityId`, `isAdmin`) VALUES
+INSERT INTO `user` (`id`, `firstname`, `name`, `email`, `pass`, `address`, `cityId`, `isAdmin`) VALUES
 (1, 'Louis', 'De Spiegelaere', 'louis.despiegelaere@gmail.com', '$2y$10$hPP.n722hlALc.zMYTQQweTN/18ZjyQw/Q4mZliTZITYD1rz6/nlK', 'Rue Lucas 14', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User_Order`
+-- Structure de la table `user_order`
 --
 
-CREATE TABLE `User_Order` (
-  `id` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `orderId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `user_order`;
+CREATE TABLE IF NOT EXISTS `user_order` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NOT NULL,
+  `orderId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_User_Order_User` (`userId`),
+  KEY `fk_User_Order_Order` (`orderId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `City`
---
-ALTER TABLE `City`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Dough`
---
-ALTER TABLE `Dough`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Ingredient`
---
-ALTER TABLE `Ingredient`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Order`
---
-ALTER TABLE `Order`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Order_State` (`stateId`);
-
---
--- Indexes for table `OrderLine`
---
-ALTER TABLE `OrderLine`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_OrderLine_Order` (`orderId`),
-  ADD KEY `fk_OrderLine_Pizza` (`pizzaId`),
-  ADD KEY `fk_OrderLine_Dough` (`doughId`),
-  ADD KEY `fk_OrderLine_Size` (`sizeId`);
-
---
--- Indexes for table `Pizza`
---
-ALTER TABLE `Pizza`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Pizza_Ingredient`
---
-ALTER TABLE `Pizza_Ingredient`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Unicity_Pizza_Ingredient` (`ingredientId`,`pizzaId`),
-  ADD KEY `fk_Pizza_Ingredient_Pizza` (`pizzaId`);
-
---
--- Indexes for table `Size`
---
-ALTER TABLE `Size`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `State`
---
-ALTER TABLE `State`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Supplement`
---
-ALTER TABLE `Supplement`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Unicity_Supplement` (`ingredientId`,`orderLineId`),
-  ADD KEY `fk_Supplement_OrderLine` (`orderLineId`);
-
---
--- Indexes for table `User`
---
-ALTER TABLE `User`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Unicity_Email` (`email`),
-  ADD KEY `fk_User_City` (`cityId`);
-
---
--- Indexes for table `User_Order`
---
-ALTER TABLE `User_Order`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_User_Order_User` (`userId`),
-  ADD KEY `fk_User_Order_Order` (`orderId`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `City`
+-- Contraintes pour la table `order`
 --
-ALTER TABLE `City`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `order`
+  ADD CONSTRAINT `fk_Order_State` FOREIGN KEY (`stateId`) REFERENCES `state` (`id`);
 
 --
--- AUTO_INCREMENT for table `Dough`
+-- Contraintes pour la table `orderline`
 --
-ALTER TABLE `Dough`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `orderline`
+  ADD CONSTRAINT `fk_OrderLine_Dough` FOREIGN KEY (`doughId`) REFERENCES `dough` (`id`),
+  ADD CONSTRAINT `fk_OrderLine_Order` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`),
+  ADD CONSTRAINT `fk_OrderLine_Pizza` FOREIGN KEY (`pizzaId`) REFERENCES `pizza` (`id`),
+  ADD CONSTRAINT `fk_OrderLine_Size` FOREIGN KEY (`sizeId`) REFERENCES `size` (`id`);
 
 --
--- AUTO_INCREMENT for table `Ingredient`
+-- Contraintes pour la table `pizza_ingredient`
 --
-ALTER TABLE `Ingredient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `pizza_ingredient`
+  ADD CONSTRAINT `fk_Pizza_Ingredient_Ingredient` FOREIGN KEY (`ingredientId`) REFERENCES `ingredient` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_Pizza_Ingredient_Pizza` FOREIGN KEY (`pizzaId`) REFERENCES `pizza` (`id`) ON DELETE CASCADE;
 
 --
--- AUTO_INCREMENT for table `Order`
+-- Contraintes pour la table `supplement`
 --
-ALTER TABLE `Order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `supplement`
+  ADD CONSTRAINT `fk_Supplement_Ingredient` FOREIGN KEY (`ingredientId`) REFERENCES `ingredient` (`id`),
+  ADD CONSTRAINT `fk_Supplement_OrderLine` FOREIGN KEY (`orderLineId`) REFERENCES `orderline` (`id`);
 
 --
--- AUTO_INCREMENT for table `OrderLine`
+-- Contraintes pour la table `user`
 --
-ALTER TABLE `OrderLine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_User_City` FOREIGN KEY (`cityId`) REFERENCES `city` (`id`);
 
 --
--- AUTO_INCREMENT for table `Pizza`
+-- Contraintes pour la table `user_order`
 --
-ALTER TABLE `Pizza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `Pizza_Ingredient`
---
-ALTER TABLE `Pizza_Ingredient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `Size`
---
-ALTER TABLE `Size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `State`
---
-ALTER TABLE `State`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Supplement`
---
-ALTER TABLE `Supplement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `User`
---
-ALTER TABLE `User`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `User_Order`
---
-ALTER TABLE `User_Order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `Order`
---
-ALTER TABLE `Order`
-  ADD CONSTRAINT `fk_Order_State` FOREIGN KEY (`stateId`) REFERENCES `State` (`id`);
-
---
--- Constraints for table `OrderLine`
---
-ALTER TABLE `OrderLine`
-  ADD CONSTRAINT `fk_OrderLine_Dough` FOREIGN KEY (`doughId`) REFERENCES `Dough` (`id`),
-  ADD CONSTRAINT `fk_OrderLine_Order` FOREIGN KEY (`orderId`) REFERENCES `Order` (`id`),
-  ADD CONSTRAINT `fk_OrderLine_Pizza` FOREIGN KEY (`pizzaId`) REFERENCES `Pizza` (`id`),
-  ADD CONSTRAINT `fk_OrderLine_Size` FOREIGN KEY (`sizeId`) REFERENCES `Size` (`id`);
-
---
--- Constraints for table `Pizza_Ingredient`
---
-ALTER TABLE `Pizza_Ingredient`
-  ADD CONSTRAINT `fk_Pizza_Ingredient_Ingredient` FOREIGN KEY (`ingredientId`) REFERENCES `Ingredient` (`id`),
-  ADD CONSTRAINT `fk_Pizza_Ingredient_Pizza` FOREIGN KEY (`pizzaId`) REFERENCES `Pizza` (`id`);
-
---
--- Constraints for table `Supplement`
---
-ALTER TABLE `Supplement`
-  ADD CONSTRAINT `fk_Supplement_Ingredient` FOREIGN KEY (`ingredientId`) REFERENCES `Ingredient` (`id`),
-  ADD CONSTRAINT `fk_Supplement_OrderLine` FOREIGN KEY (`orderLineId`) REFERENCES `OrderLine` (`id`);
-
---
--- Constraints for table `User`
---
-ALTER TABLE `User`
-  ADD CONSTRAINT `fk_User_City` FOREIGN KEY (`cityId`) REFERENCES `City` (`id`);
-
---
--- Constraints for table `User_Order`
---
-ALTER TABLE `User_Order`
-  ADD CONSTRAINT `fk_User_Order_Order` FOREIGN KEY (`orderId`) REFERENCES `Order` (`id`),
-  ADD CONSTRAINT `fk_User_Order_User` FOREIGN KEY (`userId`) REFERENCES `User` (`id`);
+ALTER TABLE `user_order`
+  ADD CONSTRAINT `fk_User_Order_Order` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`),
+  ADD CONSTRAINT `fk_User_Order_User` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

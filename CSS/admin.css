@@ -12,16 +12,24 @@ body {
     font-family: 'Quicksand', sans-serif;
     margin: 0px;
     color: white;
+    flex-direction: column;
     min-width:600px;
     min-height:150vh;
-    display: flex;
+    /*display: table;*/
     position:relative;
 }
 
 .mainWrapper {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    border: 1px solid white;
+    flex-wrap: nowrap;
+    gap : 3em;
+    width:90%;
+    margin:auto;
+    margin-top: 20px;
+}
 
+.mainWrapper td, .mainWrapper th {
+    border:1px solid #DD7835;
+    text-align:center;
 }

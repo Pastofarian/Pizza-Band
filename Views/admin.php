@@ -4,14 +4,6 @@
       header('Location: ../Controlers/admin.php');
 ?>
 
-
-<?php
-   session_start();
-   if (!isset($_SESSION['admin']))
-      header('Location: ../Controlers/admin.php');
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -31,7 +23,6 @@
    </head>
    <body class="homePage">
       <header></header>
-      <header></header>
       <?php
          include './nav.php';
       ?>
@@ -39,10 +30,6 @@
          <div id="pizzas"></div>
          <div id="ingredients"></div>
       </div>
-      <?php
-         include './footer.php';
-      ?>
-      <div id="backgroundFilter">
       <?php
          include './footer.php';
       ?>
