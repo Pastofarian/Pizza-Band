@@ -10,6 +10,7 @@ $url;
 $_SESSION["citylist"] = readCities();
 $_SESSION["error"] = "";
 
+
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])
 {
 
@@ -20,10 +21,10 @@ if(isset($_POST) && !empty($_POST))
 {
     $isPassAndLogOk = false;
     $error = false;
-    $email = $_POST["logEmail"];
-    $data = $_POST["logPassword"]; 
+    $email = sanitize_input($_POST["logEmail"]);
+    $pass = sanitize_input($_POST["logPassword"]); 
     unset($_POST["logPassword"]);
-    var_dump($email);
+    //var_dump($email);
 
     if (empty(checkEmail($email)))
     {
@@ -31,7 +32,7 @@ if(isset($_POST) && !empty($_POST))
 
         if($user != 'NULL')
         {
-            if(password_verify($data, $user[0]['pass']))
+            if(password_verify($pass, $user[0]['pass']))
             {
                 $isPassAndLogOk = true;
             }

@@ -8,4 +8,3 @@ if(isset($_SESSION) && isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 
 }
 
 header("Location: signin_login.php");
-?>

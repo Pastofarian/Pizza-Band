@@ -37,3 +37,16 @@ function checkPassword($password){
     }
     return $error;
 }
+
+// prevent JavaScript and SQL injection attacks in an HTML form
+
+// The trim() function removes any whitespace from the beginning and end of the input. 
+// The stripslashes() function removes any backslashes that may have been added to the input. 
+// The htmlspecialchars() function converts special characters to their HTML entities, so they can't be executed as code.
+
+function sanitize_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
