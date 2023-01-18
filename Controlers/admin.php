@@ -19,4 +19,3 @@ else
 }
 
 header($url);
-?>

@@ -73,24 +73,30 @@ $url;
 $autentificationPage = '../Views/signin_login.php';
 $login = '../Views/menu_pizzas.php';
 
-$data1 = $_POST["signup-password"];
+$firstname = sanitize_input($_POST["firstname"]);
+$name = sanitize_input($_POST["name"]);
+$email = sanitize_input($_POST["email"]);
+$adress = sanitize_input($_POST["address"]);
+$cityId = sanitize_input($_POST["cityId"]);
+$pass1 = sanitize_input($_POST["signup-password"]);
+$pass2 = sanitize_input($_POST["signup-password-confirm"]);
+
 unset($_POST["signup-password"]); //efface les traces
-$data2 = $_POST["signup-password-confirm"];
 unset($_POST["signup-password-confirm"]);
 
 $_SESSION["citylist"] = readCities();
 
 if(!empty($_POST)){
     $_SESSION["checkEmpty"] = checkEmpty($_POST);
-    $_SESSION["matchPassword"] = MatchPassword($data1, $data2);
-    $_SESSION["checkIdFn"] = validateUserId($_POST["firstname"], "firstname");
-    $_SESSION["checkIdLn"] = validateUserId($_POST["name"], "name");
-    $_SESSION["checkEmail"] = checkEmail($_POST["email"]);
-    $_SESSION["checkPassword"] = checkPassword($data1);
-    $_SESSION["checkDuplicates"] = duplicates($_POST["email"]);
-    $_SESSION["checkCityId"] = checkCityId($_POST["cityId"]);
+    $_SESSION["matchPassword"] = MatchPassword($pass1, $pass2);
+    $_SESSION["checkIdFn"] = validateUserId($firstname, "firstname");
+    $_SESSION["checkIdLn"] = validateUserId($name, "name");
+    $_SESSION["checkEmail"] = checkEmail($email);
+    $_SESSION["checkPassword"] = checkPassword($pass1);
+    $_SESSION["checkDuplicates"] = duplicates($email);
+    $_SESSION["checkCityId"] = checkCityId($cityId);
 
-    $data1 = password_hash($data1,PASSWORD_BCRYPT); //écrase data1 avec password crypté
+    $pass1 = password_hash($pass1,PASSWORD_BCRYPT); //écrase data1 avec password crypté
 
     if(
         empty($_SESSION["checkEmpty"]) &&
@@ -102,9 +108,8 @@ if(!empty($_POST)){
         empty($_SESSION["checkDuplicates"]) &&
         empty($_SESSION["checkCityId"])
     ) {
-        insertUser($_POST["firstname"], $_POST["name"], $_POST["email"], $data1, $_POST["address"],$_POST["cityId"]);
+        insertUser($firstname, $name, $email, $pass1, $adress, $cityId);
     }
 }
 header("Location: ../Views/signin_login.php");
 //session_destroy();
-?>

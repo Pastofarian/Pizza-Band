@@ -1,43 +1,71 @@
 #panier {
-    flex:1;
+    flex: 1;
     display: flex;
     height: 100%;
     flex-direction: column;
+
 }
-#panierjson
-{
-    width:95%;
-    margin:auto;
-    height:100%;
-    background-color: rgba(255,255,255,0.8);
+
+#panierjson {
+    justify-content: flex-start;
+    width: 95%;
+    margin: auto;
+    height: 100%;
+    /* background-color: rgba(255, 255, 255, 0.2); */
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    gap:5px;
-    padding:5px;
+    gap: 18px;
+    padding: 5px;
+    align-content: flex-start;
+    border-left: 1px solid #DD7835;
 }
-#panierjson .orderlineContainer
-{
+
+#panierjson .orderlineContainer {
+    margin: 0 auto;
+    width: 80%;
+    color: white;
+    font-weight: 500;
     box-shadow: 0 0 3px black;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    padding: 10px;
+    border-left: 1px solid #DD7835;
 }
-#panierjson .textField
-{
+
+#panierjson .textField {
     display: block;
 }
-#panierjson .quantityValue, #panierjson .pizzaName
-{
+
+#panierjson .quantityValue,
+#panierjson .pizzaName {
     display: inline-block;
 }
+
 /*#panierjson .quantityValue, #panierjson .pizzaName
 {
     display: inline;
 }*/
-#panierjson ul
-{
+#panierjson ul {
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
     list-style-type: none;
+}
+
+.deletebtn {
+    width: 75%;
+    margin: auto;
+    font-family: 'Quicksand', sans-serif;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.deletebtn:hover {
+    background-color: rgba(255, 255, 255, 0.07);
 }
