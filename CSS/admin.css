@@ -14,6 +14,7 @@ body {
     color: white;
     min-width:600px;
     min-height:150vh;
+    display: flex;
     position:relative;
 }
 

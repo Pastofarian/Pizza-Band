@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             'quantity':fields['quantity'].value,
             'price':fields['totalPrice'].value
         }
-        postRequest('http://localhost/Projet%20PHP/test3/Controlers/js_ctrl_pushSessionOrderline.php', function(httpRequest) {
+        postRequest(`${path}/Controlers/js_ctrl_pushSessionOrderline.php`, function(httpRequest) {
             refreshBasket();
         }, post);
     });
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function updateForm(clickedPizza, fields) {
     let clickedPizzaId = clickedPizza.getAttribute('pizzaid');
 
-    request('http://localhost/Projet%20PHP/test3/Controlers/js_ctrl_orderlineFormFillingDatas.php', function(httpRequest) {
+    request(`${path}/Controlers/js_ctrl_orderlineFormFillingDatas.php`, function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         //Création des élements dom options des différents champs select en utilisant la réponse de la requête
         console.log(response);
@@ -130,7 +130,7 @@ function fillSupplements(suppSelect, selectedPizzaId) {
     while (suppSelect.options.length > 0)
         suppSelect.remove(suppSelect.lastChild);
     //Requete base de donnée pour connaitre les ingrédients disponible à la nouvelle pizza sélectionnée
-    request('http://localhost/Projet%20PHP/test3/Controlers/js_ctrl_readAvailableIngredientsByPizzaId.php?id='+selectedPizzaId, function(httpRequest) {
+    request(`${path}/Controlers/js_ctrl_readAvailableIngredientsByPizzaId.php?id=${selectedPizzaId}`, function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         if (response != 'NULL') {
             for (let ingredient of response) {
@@ -238,7 +238,7 @@ function removeAllOptions(select) {
 
 function refreshBasket() {
     let parentContainer = document.getElementById("panierjson");
-    request('http://localhost/Projet%20PHP/test3/Controlers/js_ctrl_panierJson.php', function(httpRequest) {
+    request(`${path}/Controlers/js_ctrl_panierJson.php`, function(httpRequest) {
         let response = JSON.parse(httpRequest.responseText);
         while (parentContainer.children.length > 0) {
             parentContainer.removeChild(parentContainer.children[0])
@@ -289,7 +289,7 @@ function refreshBasket() {
                         }
                     }
                 }
-                httpRequest.open('GET', 'http://localhost/Projet%20PHP/test3/Controlers/js_ctrl_cancelOrderline.php?index='+i, true);
+                httpRequest.open(`GET`, `${path}/Controlers/js_ctrl_cancelOrderline.php?index=${i}`, true);
                 httpRequest.send();
             })
         }

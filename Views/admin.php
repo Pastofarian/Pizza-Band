@@ -16,7 +16,10 @@
       <link rel="stylesheet" href="../CSS/nav.css" />
       <link rel="stylesheet" href="../CSS/footer.css" />
       <link rel="stylesheet" href="../CSS/backgroundFilter.css">
-      <script type="text/javascript" src="../Scripts/admin.js"></script>
+      <script type="text/javascript" src="../Scripts/testView/Table.js"></script>
+      <script type="text/javascript" src="../Scripts/testView/Many2ManyTable.js"></script>
+      <script type="text/javascript" src="../Scripts/testView/main.js"></script>
+      <script type="text/javascript" src="../Scripts/path.js"></script>
       <title>AdminView</title>
    </head>
    <body class="homePage">
@@ -25,12 +28,8 @@
          include './nav.php';
       ?>
       <div class="mainWrapper">
-         <?php
-            include './pizza_admin.php';
-            include './ingre_admin.php';
-            include './size_admin.php';
-            include './dough_admin.php';
-         ?>
+         <div id="pizzas"></div>
+         <div id="ingredients"></div>
       </div>
       <?php
          include './footer.php';

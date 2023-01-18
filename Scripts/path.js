@@ -1,0 +1,1 @@
+const path = 'http://localhost/pizza-band';

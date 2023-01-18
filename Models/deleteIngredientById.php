@@ -1,6 +1,6 @@
 <?php
 include_once 'connection.php';
-function deleteIngredient($id){
+function deleteIngredientById($id){
     $query = "DELETE FROM `Ingredient` WHERE id = :id";
     $query_params = array(
         ':id'=>$id
@@ -13,7 +13,3 @@ function deleteIngredient($id){
         die("Failed query : " . $ex->getMessage());
     }
 }
-deleteIngredient(10);
-
-//insertDB("Doe", "John", "2022-08-05", "john.doe@outlook.com", "pass");
-?>

@@ -25,6 +25,7 @@ if(!(isset($_SESSION["pizzasList"])) || !(isset($_SESSION["suppList"])))
       <link rel="stylesheet" href="../CSS/footer.css">
       <link rel="stylesheet" href="../CSS/panier.css">
       <link rel="stylesheet" href="../CSS/backgroundFilter.css">
+      <script type="text/javascript" src="../Scripts/path.js"></script>
       <script type="text/javascript" src="../Scripts/menu_pizzas.js" defer></script>
       <title>Menu des pizzas</title>
    </head>
